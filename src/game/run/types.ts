@@ -1,11 +1,7 @@
 import type { Character } from "../character/types";
+import type { RandomStream } from "../random/seed";
 
-export interface RandomStates {
-	character: number;
-	exploration: number;
-	combat: number;
-	loot: number;
-}
+export type RandomStates = Record<RandomStream, number>;
 
 export interface CurrentRun {
 	runId: string;
