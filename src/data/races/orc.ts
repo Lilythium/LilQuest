@@ -1,4 +1,20 @@
 import type { RaceNameRules } from "../../game/character/naming/types";
+import type { RaceDefinition } from "./types";
+
+export const orcRace: RaceDefinition = {
+    id: "orc",
+    name: "Orc",
+    description: "Orcs are a strong and resilient race, known for their combat prowess and tribal culture.",
+    attributeMultipliers: {
+        strength: 1.4,
+        dexterity: 1.0,
+        constitution: 1.2,
+        intelligence: 0.8,
+        wisdom: 0.9,
+        charisma: 0.8
+    },
+    startingTraitId: "orc-unyielding"
+};
 
 export const orcNames = {
     genderExempt: true,

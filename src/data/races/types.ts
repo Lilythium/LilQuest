@@ -5,4 +5,5 @@ export interface RaceDefinition {
     name: string;
     description: string;
     attributeMultipliers: Attributes;
+    startingTraitId: string;
 }
