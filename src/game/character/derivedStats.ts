@@ -12,6 +12,7 @@ export interface DerivedStats {
 
     carryingCapacity: number;
     initiative: number;
+    speed: number;
 }
 
 export const DERIVED_STAT_FORMULAS = {
@@ -19,8 +20,8 @@ export const DERIVED_STAT_FORMULAS = {
         20 + attributes.constitution * 5,
 
     maxStamina: (attributes: Attributes) =>
-        10 + attributes.constitution * 2
-            + attributes.dexterity * 2,
+        10 + attributes.constitution * 4
+            + attributes.dexterity,
 
     staminaRegen: (attributes: Attributes) =>
         1 + attributes.dexterity * 0.2,
@@ -29,6 +30,9 @@ export const DERIVED_STAT_FORMULAS = {
         5 + attributes.strength * 1.5,
 
     initiative: (attributes: Attributes) =>
+        attributes.dexterity,
+
+    speed: (attributes: Attributes) =>
         attributes.dexterity
 };
 
@@ -65,6 +69,8 @@ export function calculateDerivedStats(
 
         initiative:
             DERIVED_STAT_FORMULAS.initiative(attributes)
-            - encumbranceConfig.initiativePenalty
+            - encumbranceConfig.initiativePenalty,
+
+        speed: DERIVED_STAT_FORMULAS.speed(attributes)
     };
 }

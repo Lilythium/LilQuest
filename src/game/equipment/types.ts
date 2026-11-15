@@ -4,6 +4,7 @@ import type {
     EquipmentSlotType
 } from "./slots";
 import type { Attributes, SecondaryStats } from "../character/types";
+import type { Skill } from "../skills/types";
 
 export interface EquipmentDefinition {
     id: string;
@@ -20,6 +21,7 @@ export interface EquipmentDefinition {
 export interface HandheldEquipmentDefinition
     extends EquipmentDefinition {
     slotType: "weapon" | "shield";
+    skill: string;
     handsRequired?: 1 | 2;
 }
 

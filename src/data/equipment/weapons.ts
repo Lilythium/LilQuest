@@ -10,6 +10,7 @@ export const ShortIron: HandheldEquipmentDefinition = {
         value: 5
     },
     secondaryModifierPool: ["dexterity", "critChance", "critMultiplier"],
+    skill: "slash",
     weight: 2
 };
 
@@ -24,6 +25,7 @@ export const SplitWoodBow: HandheldEquipmentDefinition = {
         value: 5
     },
     secondaryModifierPool: ["strength", "critChance", "critMultiplier"],
+    skill: "simpleShot",
     weight: 1.5
 };
 
@@ -38,5 +40,6 @@ export const OakCudgel: HandheldEquipmentDefinition = {
         value: 6
     },
     secondaryModifierPool: ["luck", "critChance", "critMultiplier"],
+    skill: "bludgeon",
     weight: 3
 };
