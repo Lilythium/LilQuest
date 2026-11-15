@@ -5,5 +5,4 @@ export interface RaceDefinition {
     name: string;
     description: string;
     attributeMultipliers: Attributes;
-    hasGender: boolean;
 }
