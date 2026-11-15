@@ -1,3 +1,5 @@
+import type { CharacterGender } from "./naming/types";
+
 export interface Attributes {
     strength: number;
     dexterity: number;
@@ -11,12 +13,11 @@ export interface Character {
     id: string;
     name: string;
     raceId: string;
-    genderId: string;
+    genderId: CharacterGender;
 
     level: number;
     experience: number;
     gold: number;
 
     attributes: Attributes;
-    runSeed: number;
 }

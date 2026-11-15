@@ -32,8 +32,7 @@ export function createCharacter(
         level: 1,
         experience: 0,
         gold: 0,
-        attributes: generateStartingAttributes(rng, raceMultipliers),
-        runSeed: rng.getState()
+        attributes: generateStartingAttributes(rng, raceMultipliers)
     };
 }
 
