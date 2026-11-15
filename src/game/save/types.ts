@@ -1,8 +1,10 @@
 import type { CurrentRun } from "../run/types";
+import type { PermanentProgress } from "../progression/types";
 
 export interface GameSave {
-	schemaVersion: 1;
-	currentRun: CurrentRun | null;
     saveId: string;
-    permanentProgress: string[];
+    schemaVersion: 1;
+
+    permanentProgress: PermanentProgress;
+    currentRun: CurrentRun | null;
 }

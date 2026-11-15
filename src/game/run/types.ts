@@ -3,9 +3,17 @@ import type { RandomStream } from "../random/seed";
 
 export type RandomStates = Record<RandomStream, number>;
 
+export interface WorldProgress {
+    worldId: string;
+    currentStageId: string;
+    completedStageIds: string[];
+}
+
 export interface CurrentRun {
-	runId: string;
-	runSeed: string;
-	randomStates: RandomStates;
-	character: Character;
+    runId: string;
+    runSeed: string;
+    randomStates: Record<RandomStream, number>;
+    character: Character;
+
+    worldProgress: WorldProgress[];
 }
