@@ -7,13 +7,20 @@ import type {
 } from "./naming/types";
 
 import type { RandomGenerator } from "../random/rng";
-import type { Attributes, Character } from "./types";
+import {
+    DEFAULT_SECONDARY_STATS,
+    type Attributes,
+    type Character,
+    type SecondaryStats
+} from "./types";
 
 export function createCharacter(
     raceId: string,
     genderId: CharacterGender,
     namingRules: RaceNameRules,
     raceMultipliers: Attributes,
+    secondaryStatModifiers: Partial<SecondaryStats>,
+    startingWeaponId: string,
     rng: RandomGenerator
 ): Character {
     const id = crypto.randomUUID();
@@ -32,7 +39,9 @@ export function createCharacter(
         level: 1,
         experience: 0,
         gold: 0,
-        attributes: generateStartingAttributes(rng, raceMultipliers)
+        attributes: generateStartingAttributes(rng, raceMultipliers),
+        secondaryStats: generateStartingSecondaryStats(secondaryStatModifiers),
+        startingWeaponId
     };
 }
 
@@ -89,5 +98,17 @@ function generateStartingAttributes(
         intelligence: Math.round(attributes.intelligence * raceMultipliers.intelligence),
         wisdom: Math.round(attributes.wisdom * raceMultipliers.wisdom),
         charisma: Math.round(attributes.charisma * raceMultipliers.charisma)
+    };
+}
+
+function generateStartingSecondaryStats(
+    raceModifiers: Partial<SecondaryStats> = {}
+): SecondaryStats {
+    return {
+        luck: DEFAULT_SECONDARY_STATS.luck + (raceModifiers.luck ?? 0),
+        healthRegen: DEFAULT_SECONDARY_STATS.healthRegen + (raceModifiers.healthRegen ?? 0),
+        damageReduction: DEFAULT_SECONDARY_STATS.damageReduction + (raceModifiers.damageReduction ?? 0),
+        critChance: DEFAULT_SECONDARY_STATS.critChance + (raceModifiers.critChance ?? 0),
+        critMultiplier: DEFAULT_SECONDARY_STATS.critMultiplier + (raceModifiers.critMultiplier ?? 0)
     };
 }

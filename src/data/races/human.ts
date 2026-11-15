@@ -5,8 +5,7 @@ import type { RaceDefinition } from "./types";
 export const humanRace: RaceDefinition = {
     id: "human",
     name: "Human",
-    description: "",
-    startingTraitId: humanAdaptability.id,
+    description: "Humans are a versatile and adaptable race, known for their resilience and ability to thrive in various environments.",
     attributeMultipliers: {
         strength: 1,
         dexterity: 1,
@@ -14,7 +13,9 @@ export const humanRace: RaceDefinition = {
         intelligence: 1,
         wisdom: 1,
         charisma: 1
-    }
+    },
+    startingTraitId: humanAdaptability.id,
+    startingWeaponId: "short-iron",
 };
 
 export const humanNames = {

@@ -13,7 +13,8 @@ export const orcRace: RaceDefinition = {
         wisdom: 0.9,
         charisma: 0.8
     },
-    startingTraitId: "orc-unyielding"
+    startingTraitId: "orc-unyielding",
+    startingWeaponId: "oak-cudgel"
 };
 
 export const orcNames = {

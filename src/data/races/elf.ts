@@ -13,7 +13,8 @@ export const elfRace: RaceDefinition = {
         wisdom: 1.2,
         charisma: 1.1
     },
-    startingTraitId: "elf-keen-reflexes"
+    startingTraitId: "elf-keen-reflexes",
+    startingWeaponId: "split-wood-bow",
 };
 
 export const elfNames = {
