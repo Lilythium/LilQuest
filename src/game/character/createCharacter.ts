@@ -1,10 +1,6 @@
 
 import { generateName } from "./naming/nameGenerator";
-
-import type {
-    CharacterGender,
-    RaceNameRules
-} from "./naming/types";
+import type {CharacterGender} from "./naming/types";
 
 import type { RandomGenerator } from "../random/rng";
 import {
@@ -14,31 +10,28 @@ import {
     type SecondaryStats
 } from "./types";
 import { calculateDerivedStats } from "./derivedStats";
+import type {RaceContent} from "../../data/races/types";
 
 export function createCharacter(
-    raceId: string,
+    race: RaceContent,
     genderId: CharacterGender,
-    namingRules: RaceNameRules,
-    raceMultipliers: Attributes,
-    secondaryStatModifiers: Partial<SecondaryStats>,
-    startingWeaponId: string,
     rng: RandomGenerator
 ): Character {
     const id = crypto.randomUUID();
 
     const name = generateName(
-        namingRules,
+        race.namingRules,
         genderId,
         rng
     );
 
-    const attributes = generateStartingAttributes(rng, raceMultipliers);
-    const secondaryStats = generateStartingSecondaryStats(secondaryStatModifiers);
+    const attributes = generateStartingAttributes(rng, race.definition.attributeMultipliers);
+    const secondaryStats = generateStartingSecondaryStats(race.definition.secondaryStatModifiers);
 
     return {
         id,
         name,
-        raceId,
+        raceId: race.definition.id,
         genderId,
         level: 1,
         experience: 0,
@@ -51,7 +44,7 @@ export function createCharacter(
         encounterStats: null,
         learnedSkillIds: [],
         activeSkillIds: [],
-        traitIds: []
+        traitIds: [race.definition.startingTraitId]
     };
 }
 

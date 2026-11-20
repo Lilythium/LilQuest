@@ -1,3 +1,4 @@
+import type { RaceNameRules } from "../../game/character/naming/types";
 import type { Attributes, SecondaryStats } from "../../game/character/types";
 
 export interface RaceDefinition {
@@ -8,4 +9,9 @@ export interface RaceDefinition {
     startingTraitId: string;
     startingWeaponId: string;
     secondaryStatModifiers?: Partial<SecondaryStats>;
+}
+
+export interface RaceContent {
+    definition: RaceDefinition;
+    namingRules: RaceNameRules;
 }
