@@ -1,6 +1,5 @@
+import type { CharacterEquipment, EquipmentInstance } from "../equipment/types";
 import type { CharacterGender } from "./naming/types";
-import type { Skill } from "../skills/types";
-import type { Trait } from "../traits/types";
 
 export interface Attributes {
     strength: number;
@@ -25,6 +24,16 @@ export const DEFAULT_SECONDARY_STATS: SecondaryStats = {
     critMultiplier: 1.5
 };
 
+export interface EncounterState {
+    currentStamina: number;
+    currentInitiative: number;
+}
+
+export const EMPTY_ENCOUNTER_STATE: EncounterState = {
+    currentStamina: 0,
+    currentInitiative: 0
+};
+
 export interface Character {
     id: string;
     name: string;
@@ -37,12 +46,16 @@ export interface Character {
     experience: number;
     gold: number;
 
-    currentHealth: number;
+    currentHealth: number; // Health will persist between encounters for now, may change later
+    encounterStats: EncounterState | null;
 
     attributes: Attributes;
     secondaryStats: SecondaryStats;
-    startingWeaponId: string;
-    totalSkills: Skill[];
-    activeSkills: Skill[];
-    traits: Trait[];
+
+    inventory: EquipmentInstance[];
+    equipment: CharacterEquipment;
+
+    learnedSkillIds: string[];
+    activeSkillIds: string[];
+    traitIds: string[];
 }

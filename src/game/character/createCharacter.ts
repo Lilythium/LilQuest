@@ -45,11 +45,13 @@ export function createCharacter(
         gold: 0,
         attributes: attributes,
         secondaryStats: secondaryStats,
-        startingWeaponId,
+        inventory: [], //TODO weapon generation - generate start weapon here
+        equipment: {},
         currentHealth: calculateDerivedStats(attributes, secondaryStats, 0, 0).maxHealth,
-        totalSkills: [],
-        activeSkills: [],
-        traits: []
+        encounterStats: null,
+        learnedSkillIds: [],
+        activeSkillIds: [],
+        traitIds: []
     };
 }
 
