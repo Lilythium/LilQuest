@@ -13,6 +13,9 @@ export interface DerivedStats {
     carryingCapacity: number;
     initiative: number;
     speed: number;
+
+    armour: number;
+    magicResistance: number;
 }
 
 export const DERIVED_STAT_FORMULAS = {
@@ -33,13 +36,20 @@ export const DERIVED_STAT_FORMULAS = {
         attributes.dexterity,
 
     speed: (attributes: Attributes) =>
-        attributes.dexterity
+        attributes.dexterity,
+
+    armour: (equipmentArmour: number) =>
+        equipmentArmour,
+
+    magicResistance: (attributes: Attributes) =>
+        attributes.wisdom * 1.5
 };
 
 export function calculateDerivedStats(
     attributes: Attributes,
     secondaryStats: SecondaryStats,
-    equippedWeight: number
+    equippedWeight: number,
+    equipmentArmour: number
 ): DerivedStats {
     const carryingCapacity =
         DERIVED_STAT_FORMULAS.carryingCapacity(attributes);
@@ -71,6 +81,11 @@ export function calculateDerivedStats(
             DERIVED_STAT_FORMULAS.initiative(attributes)
             - encumbranceConfig.initiativePenalty,
 
-        speed: DERIVED_STAT_FORMULAS.speed(attributes)
+        speed: DERIVED_STAT_FORMULAS.speed(attributes),
+
+        armour: DERIVED_STAT_FORMULAS.armour(equipmentArmour),
+
+        magicResistance:
+            DERIVED_STAT_FORMULAS.magicResistance(attributes)
     };
 }

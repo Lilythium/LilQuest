@@ -3,6 +3,7 @@ export type EquipmentSlotType =
     | "helm"
     | "chestplate"
     | "greaves"
+    | "boots"
     | "amulet"
     | "ring"
     | "weapon"
@@ -38,6 +39,7 @@ export const equipmentSlotCategories = {
     helm: "armour",
     chestplate: "armour",
     greaves: "armour",
+    boots: "armour",
     amulet: "accessory",
     ring: "accessory",
     weapon: "weapon",

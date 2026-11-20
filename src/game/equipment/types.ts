@@ -4,7 +4,6 @@ import type {
     EquipmentSlotType
 } from "./slots";
 import type { Attributes, SecondaryStats } from "../character/types";
-import type { Skill } from "../skills/types";
 
 export interface EquipmentDefinition {
     id: string;
@@ -16,6 +15,11 @@ export interface EquipmentDefinition {
     secondaryModifierPool: readonly EquipmentStatModifier["stat"][];
 
     weight: number;
+}
+
+export interface ArmourDefinition extends EquipmentDefinition {
+    slotType: "helm" | "chestplate" | "greaves" | "boots";
+    armourValue: number;
 }
 
 export interface HandheldEquipmentDefinition
@@ -117,7 +121,8 @@ export interface ArmourSetDefinition {
     name: string;
     description: string;
 
-    helm: EquipmentDefinition;
-    chestplate: EquipmentDefinition;
-    greaves: EquipmentDefinition;
+    helm: ArmourDefinition;
+    chestplate: ArmourDefinition;
+    greaves: ArmourDefinition;
+    boots: ArmourDefinition;
 }
