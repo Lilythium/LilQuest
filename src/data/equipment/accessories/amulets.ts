@@ -5,7 +5,7 @@ export const amuletOfFortune: EquipmentDefinition = {
     name: "Amulet of Fortune",
     description: "An amulet that brings good luck to its wearer.",
     slotType: "amulet",
-    primaryAttribute: {
+    primaryModifier: {
         stat: "luck",
         value: 2
     },

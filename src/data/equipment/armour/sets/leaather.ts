@@ -9,7 +9,7 @@ export const leatherSet: ArmourSetDefinition = {
         name: "Leather Helm",
         description: "A simple leather helm.",
         slotType: "helm",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "dexterity",
             value: 1
         },
@@ -22,7 +22,7 @@ export const leatherSet: ArmourSetDefinition = {
         name: "Leather Chestplate",
         description: "A sturdy leather chestplate.",
         slotType: "chestplate",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "constitution",
             value: 2
         },
@@ -35,7 +35,7 @@ export const leatherSet: ArmourSetDefinition = {
         name: "Leather Greaves",
         description: "Protective leather greaves.",
         slotType: "greaves",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "dexterity",
             value: 1
         },
@@ -48,7 +48,7 @@ export const leatherSet: ArmourSetDefinition = {
         name: "Leather Boots",
         description: "Durable leather boots.",
         slotType: "boots",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "dexterity",
             value: 1
         },

@@ -13,6 +13,7 @@ import {
     type Character,
     type SecondaryStats
 } from "./types";
+import { calculateDerivedStats } from "./derivedStats";
 
 export function createCharacter(
     raceId: string,
@@ -31,6 +32,9 @@ export function createCharacter(
         rng
     );
 
+    const attributes = generateStartingAttributes(rng, raceMultipliers);
+    const secondaryStats = generateStartingSecondaryStats(secondaryStatModifiers);
+
     return {
         id,
         name,
@@ -39,9 +43,13 @@ export function createCharacter(
         level: 1,
         experience: 0,
         gold: 0,
-        attributes: generateStartingAttributes(rng, raceMultipliers),
-        secondaryStats: generateStartingSecondaryStats(secondaryStatModifiers),
-        startingWeaponId
+        attributes: attributes,
+        secondaryStats: secondaryStats,
+        startingWeaponId,
+        currentHealth: calculateDerivedStats(attributes, secondaryStats, 0, 0).maxHealth,
+        totalSkills: [],
+        activeSkills: [],
+        traits: []
     };
 }
 
@@ -107,7 +115,6 @@ function generateStartingSecondaryStats(
     return {
         luck: DEFAULT_SECONDARY_STATS.luck + (raceModifiers.luck ?? 0),
         healthRegen: DEFAULT_SECONDARY_STATS.healthRegen + (raceModifiers.healthRegen ?? 0),
-        damageReduction: DEFAULT_SECONDARY_STATS.damageReduction + (raceModifiers.damageReduction ?? 0),
         critChance: DEFAULT_SECONDARY_STATS.critChance + (raceModifiers.critChance ?? 0),
         critMultiplier: DEFAULT_SECONDARY_STATS.critMultiplier + (raceModifiers.critMultiplier ?? 0)
     };

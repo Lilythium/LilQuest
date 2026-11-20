@@ -1,5 +1,5 @@
-import type { EquipmentStatModifier } from "../../../game/equipment/types";
 import type { EquipmentSlotFilter } from "../../../game/equipment/slots";
+import type { EquipmentModifierStat } from "../../../game/equipment/types";
 
 export type QualityPolarity =
     | "positive"
@@ -10,9 +10,8 @@ export interface QualityPrefix {
     id: string;
     name: string;
     description: string;
-    polarity: QualityPolarity;
-    spawnWeight: number;
-    statModifiers: Partial<Record<EquipmentStatModifier["stat"], number>>;
+    statModifiers: Partial<
+        Record<EquipmentModifierStat, number>
+    >;
     allowedSlots?: readonly EquipmentSlotFilter[];
 }
-

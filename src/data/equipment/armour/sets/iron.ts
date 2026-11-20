@@ -9,7 +9,7 @@ export const ironSet: ArmourSetDefinition = {
         name: "Iron Helm",
         description: "A simple iron helm.",
         slotType: "helm",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "constitution",
             value: 1
         },
@@ -22,7 +22,7 @@ export const ironSet: ArmourSetDefinition = {
         name: "Iron Chestplate",
         description: "A sturdy iron chestplate.",
         slotType: "chestplate",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "constitution",
             value: 2
         },
@@ -35,7 +35,7 @@ export const ironSet: ArmourSetDefinition = {
         name: "Iron Greaves",
         description: "Protective iron greaves.",
         slotType: "greaves",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "strength",
             value: 1
         },
@@ -48,7 +48,7 @@ export const ironSet: ArmourSetDefinition = {
         name: "Iron Boots",
         description: "Durable iron boots.",
         slotType: "boots",
-        primaryAttribute: {
+        primaryModifier: {
             stat: "constitution",
             value: 1
         },

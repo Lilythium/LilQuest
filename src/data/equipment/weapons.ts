@@ -5,7 +5,7 @@ export const ShortIron: HandheldEquipmentDefinition = {
     name: "Short Iron",
     description: "A short iron sword.",
     slotType: "weapon",
-    primaryAttribute: {
+    primaryModifier: {
         stat: "strength",
         value: 5
     },
@@ -20,7 +20,7 @@ export const SplitWoodBow: HandheldEquipmentDefinition = {
     description: "A sturdy bow made from split wood.",
     slotType: "weapon",
     handsRequired: 2,
-    primaryAttribute: {
+    primaryModifier: {
         stat: "dexterity",
         value: 5
     },
@@ -35,7 +35,7 @@ export const OakCudgel: HandheldEquipmentDefinition = {
     description: "A sturdy cudgel made from oak wood.",
     slotType: "weapon",
     handsRequired: 2,
-    primaryAttribute: {
+    primaryModifier: {
         stat: "strength",
         value: 6
     },

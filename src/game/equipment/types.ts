@@ -11,8 +11,8 @@ export interface EquipmentDefinition {
     description: string;
     slotType: EquipmentSlotType;
 
-    primaryAttribute: EquipmentStatModifier;
-    secondaryModifierPool: readonly EquipmentStatModifier["stat"][];
+    primaryModifier: EquipmentStatModifier;
+    secondaryModifierPool: readonly EquipmentModifierStat[];
 
     weight: number;
 }
@@ -58,7 +58,9 @@ export interface QualityPrefix {
     id: string;
     name: string;
     description: string;
-    statModifiers: Partial<Record<EquipmentStatModifier["stat"], number>>;
+    statModifiers: Partial<
+        Record<EquipmentModifierStat, number>
+    >;
     allowedSlots?: readonly EquipmentSlotFilter[];
 }
 
@@ -107,12 +109,14 @@ export interface StatModifier<T extends string> {
     value: number;
 }
 
-export type StatKey =
+export type EquipmentModifierStat =
     | keyof Attributes
-    | keyof SecondaryStats;
+    | keyof SecondaryStats
+    | "armour"
+    | "magicResistance";
 
 export interface EquipmentStatModifier {
-    stat: StatKey;
+    stat: EquipmentModifierStat;
     value: number;
 }
 
