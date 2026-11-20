@@ -15,6 +15,7 @@ export const ironSet: ArmourSetDefinition = {
         },
         secondaryModifierPool: ["strength", "dexterity", "intelligence", "wisdom", "charisma"],
         weight: 2,
+        armourValue: 2
     },
     chestplate: {
         id: "iron-chestplate",
@@ -27,6 +28,7 @@ export const ironSet: ArmourSetDefinition = {
         },
         secondaryModifierPool: ["strength", "dexterity", "intelligence", "wisdom", "charisma"],
         weight: 5,
+        armourValue: 3
     },
     greaves: {
         id: "iron-greaves",
@@ -34,10 +36,24 @@ export const ironSet: ArmourSetDefinition = {
         description: "Protective iron greaves.",
         slotType: "greaves",
         primaryAttribute: {
+            stat: "strength",
+            value: 1
+        },
+        secondaryModifierPool: ["constitution", "intelligence", "wisdom", "charisma"],
+        weight: 3,
+        armourValue: 2
+    },
+    boots: {
+        id: "iron-boots",
+        name: "Iron Boots",
+        description: "Durable iron boots.",
+        slotType: "boots",
+        primaryAttribute: {
             stat: "constitution",
             value: 1
         },
-        secondaryModifierPool: ["dexterity", "intelligence", "wisdom", "charisma"],
-        weight: 3,
+        secondaryModifierPool: ["strength", "dexterity", "intelligence", "wisdom", "charisma"],
+        weight: 2,
+        armourValue: 2
     }
 };
