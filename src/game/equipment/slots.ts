@@ -16,6 +16,7 @@ export type CharacterEquipmentSlot =
     | "helm"
     | "chestplate"
     | "greaves"
+    | "boots"
     | "amulet"
     | "main-hand"
     | "off-hand"
@@ -28,6 +29,7 @@ export const characterEquipmentSlotTypes = {
     helm: "helm",
     chestplate: "chestplate",
     greaves: "greaves",
+    boots: "boots",
     amulet: "amulet",
     "main-hand": "weapon",
     "off-hand": "weapon",

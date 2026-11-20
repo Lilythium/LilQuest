@@ -9,6 +9,12 @@ export interface WorldProgress {
     completedStageIds: string[];
 }
 
+export interface CharacterPreview {
+    runSeed: string;
+    randomStates: RandomStates;
+    character: Character;
+}
+
 export interface CurrentRun {
     runId: string;
     runSeed: string;

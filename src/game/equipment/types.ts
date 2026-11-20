@@ -54,16 +54,21 @@ export type CharacterEquipment = Partial<
     Record<CharacterEquipmentSlot, EquipmentInstance>
 >;
 
+export type QualityPolarity =
+    | "positive"
+    | "mixed"
+    | "negative";
+
 export interface QualityPrefix {
     id: string;
     name: string;
     description: string;
+    polarity: QualityPolarity;
     statModifiers: Partial<
         Record<EquipmentModifierStat, number>
     >;
     allowedSlots?: readonly EquipmentSlotFilter[];
 }
-
 export type EquipmentRarity =
     | "common"
     | "uncommon"

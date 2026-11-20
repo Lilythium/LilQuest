@@ -1,9 +1,9 @@
 import type { Trait } from "../../game/traits/types";
 
-export const elfKeenSenses: Trait = {
-    id: "elf-keen-senses",
-    name: "Keen Senses",
-    description: "Gain a 5% chance to counter attack on recieving damage.",
+export const elfKeenReflexes: Trait = {
+    id: "elf-keen-reflexes",
+    name: "Keen Reflexes",
+    description: "Gain a 5% chance to counter attack on receiving damage.",
     effects: [
         {
             type: "action",

@@ -1,4 +1,4 @@
-import type { QualityPrefix } from "./types";
+import type { QualityPrefix } from "../../../game/equipment/types";
 
 // ---------- POSITIVE QUALITY PREFIXES ----------
 

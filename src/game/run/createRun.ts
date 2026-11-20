@@ -6,15 +6,16 @@ import {
 } from "../random/runRandom";
 import { createRunSeed } from "../random/seed";
 import { getRace } from "../../data/races";
-import type { CurrentRun } from "./types";
+import type {
+    CharacterPreview,
+    CurrentRun
+} from "./types";
 
-export function createRun(
+export function generateCharacterPreview(
     raceId: string,
     genderId: CharacterGender
-): CurrentRun {
+): CharacterPreview {
     const runSeed = createRunSeed();
-    const runId = crypto.randomUUID();
-
     const random = createRunRandom(runSeed);
     const race = getRace(raceId);
 
@@ -25,10 +26,20 @@ export function createRun(
     );
 
     return {
-        runId,
         runSeed,
         randomStates: captureRandomStates(random),
-        character,
+        character
+    };
+}
+
+export function createRun(
+    preview: CharacterPreview
+): CurrentRun {
+    return {
+        runId: crypto.randomUUID(),
+        runSeed: preview.runSeed,
+        randomStates: preview.randomStates,
+        character: preview.character,
         worldProgress: []
     };
 }
