@@ -12,7 +12,7 @@ export interface WorldProgress {
 export interface CurrentRun {
     runId: string;
     runSeed: string;
-    randomStates: Record<RandomStream, number>;
+    randomStates: RandomStates;
     character: Character;
 
     worldProgress: WorldProgress[];
