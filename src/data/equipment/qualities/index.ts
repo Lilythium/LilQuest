@@ -1,4 +1,4 @@
-import type { QualityPrefix } from "./types";
+import type { QualityPrefix } from "./../../../game/equipment/types";
 
 import {
     shiny,
@@ -13,7 +13,12 @@ import {
     arcane,
     brittle,
     dull,
-    cumbersome
+    cumbersome,
+    godly,
+    godlessAccessory,
+    godlessArmour,
+    brittleWeapon,
+    cursed,
 } from "./prefixes";
 
 export const qualityPrefixes: QualityPrefix[] = [
@@ -29,7 +34,12 @@ export const qualityPrefixes: QualityPrefix[] = [
     arcane,
     brittle,
     dull,
-    cumbersome
+    cumbersome,
+    godly,
+    godlessAccessory,
+    godlessArmour,
+    brittleWeapon,
+    cursed
 ];
 
 export type { QualityPrefix };

@@ -68,6 +68,7 @@ export interface QualityPrefix {
         Record<EquipmentModifierStat, number>
     >;
     allowedSlots?: readonly EquipmentSlotFilter[];
+    spawnWeight: number;
 }
 export type EquipmentRarity =
     | "common"
@@ -118,7 +119,8 @@ export type EquipmentModifierStat =
     | keyof Attributes
     | keyof SecondaryStats
     | "armour"
-    | "magicResistance";
+    | "magicResistance"
+    | "damageReduction";
 
 export interface EquipmentStatModifier {
     stat: EquipmentModifierStat;
