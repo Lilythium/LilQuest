@@ -56,6 +56,7 @@ export function createRun(
         runId: crypto.randomUUID(),
         runSeed: preview.runSeed,
         randomStates: preview.randomStates,
+        currentState: "preliminary",
         character: preview.character,
         worldProgress: []
     };

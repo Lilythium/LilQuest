@@ -3,6 +3,8 @@ import type { RandomStream } from "../random/seed";
 
 export type RandomStates = Record<RandomStream, number>;
 
+export type RunState = "preliminary" | "active" | "terminated";
+
 export interface WorldProgress {
     worldId: string;
     currentStageId: string;
@@ -19,7 +21,9 @@ export interface CurrentRun {
     runId: string;
     runSeed: string;
     randomStates: RandomStates;
-    character: Character;
 
+    currentState: RunState;
+
+    character: Character;
     worldProgress: WorldProgress[];
 }
