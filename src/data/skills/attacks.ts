@@ -7,6 +7,7 @@ export const slash: AttackSkill = {
     baseDamage: 8,
     staminaCost: 3,
     cooldown: 100,
+    damageType: "slashing",
     scaling: {
         attribute: "strength",
         coefficient: 0.5
@@ -20,6 +21,7 @@ export const simpleShot: AttackSkill = {
     baseDamage: 6,
     staminaCost: 2,
     cooldown: 60,
+    damageType: "piercing",
     scaling: {
         attribute: "dexterity",
         coefficient: 0.4
@@ -33,6 +35,7 @@ export const bludgeon: AttackSkill = {
     baseDamage: 11,
     staminaCost: 5,
     cooldown: 125,
+    damageType: "blunt",
     scaling: {
         attribute: "strength",
         coefficient: 0.6
