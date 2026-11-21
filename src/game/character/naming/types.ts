@@ -4,6 +4,16 @@ export type CharacterGender =
     | "feminine"
     | "neutral";
 
+export function isCharacterGender(
+    value: unknown
+): value is CharacterGender {
+    return (
+        value === "masculine" ||
+        value === "feminine" ||
+        value === "neutral"
+    );
+}
+
 /**
  * Name pools can either be shared across genders
  * or separated into gender-specific collections.

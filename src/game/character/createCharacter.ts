@@ -11,12 +11,21 @@ import {
 } from "./types";
 import { calculateDerivedStats } from "./derivedStats";
 import type {RaceContent} from "../../data/races/types";
+import type { PermanentProgress } from "../progression/types";
 
 export function createCharacter(
     race: RaceContent,
     genderId: CharacterGender,
-    rng: RandomGenerator
+    rng: RandomGenerator,
+    permanentProgress?: PermanentProgress
 ): Character {
+    if (
+        permanentProgress &&
+        !permanentProgress.unlockedRaceIds.includes(race.definition.id)
+    ) {
+        throw new Error(`Race "${race.definition.id}" is not unlocked.`);
+    }
+
     const id = crypto.randomUUID();
 
     const name = generateName(

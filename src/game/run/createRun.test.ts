@@ -4,9 +4,30 @@ import {
     createRun,
     generateCharacterPreview
 } from "./createRun";
+import type { PermanentProgress } from "../progression/types";
+import { isCharacterGender } from "../character/naming/types";
+
+const permanentProgress: PermanentProgress = {
+    prestigeCount: 0,
+    prestigeCurrency: 0,
+    unlockedRaceIds: ["human", "orc"],
+    unlockedClassIds: [],
+    unlockedWorldIds: [],
+    firstClearedBossIds: []
+};
 
 afterEach(() => {
     vi.restoreAllMocks();
+});
+
+describe("isCharacterGender", () => {
+    it("accepts only supported character genders", () => {
+        expect(isCharacterGender("masculine")).toBe(true);
+        expect(isCharacterGender("feminine")).toBe(true);
+        expect(isCharacterGender("neutral")).toBe(true);
+        expect(isCharacterGender("other")).toBe(false);
+        expect(isCharacterGender(null)).toBe(false);
+    });
 });
 
 describe("generateCharacterPreview", () => {
@@ -17,8 +38,8 @@ describe("generateCharacterPreview", () => {
             .mockReturnValueOnce("00000000-0000-4000-8000-000000000001")
             .mockReturnValueOnce("00000000-0000-4000-8000-000000000002");
 
-        const first = generateCharacterPreview("human", "feminine");
-        const second = generateCharacterPreview("human", "feminine");
+        const first = generateCharacterPreview("human", "feminine", permanentProgress);
+        const second = generateCharacterPreview("human", "feminine", permanentProgress);
 
         expect(first).toEqual(second);
         expect(first.runSeed).toBe("00000000-0000-4000-8000-000000000001");
@@ -29,11 +50,23 @@ describe("generateCharacterPreview", () => {
         });
         expect(Object.keys(first.randomStates)).toEqual(RANDOM_STREAMS);
     });
+
+    it("rejects races that are not unlocked", () => {
+        expect(() =>
+            generateCharacterPreview("elf", "neutral", permanentProgress)
+        ).toThrow('Race "elf" is not unlocked.');
+    });
+
+    it("rejects invalid character genders", () => {
+        expect(() =>
+            generateCharacterPreview("human", "other", permanentProgress)
+        ).toThrow('Invalid character gender: "other".');
+    });
 });
 
 describe("createRun", () => {
     it("preserves the previewed character, seed, and RNG states", () => {
-        const preview = generateCharacterPreview("orc", "neutral");
+        const preview = generateCharacterPreview("orc", "neutral", permanentProgress);
         const previewedCharacter = structuredClone(preview.character);
         const previewedRandomStates = { ...preview.randomStates };
 

@@ -1,11 +1,12 @@
 import { createCharacter } from "../character/createCharacter";
-import type { CharacterGender } from "../character/naming/types";
 import {
     captureRandomStates,
     createRunRandom
 } from "../random/runRandom";
 import { createRunSeed } from "../random/seed";
 import { getRace } from "../../data/races";
+import { isCharacterGender } from "../character/naming/types";
+import type { PermanentProgress } from "../progression/types";
 import type {
     CharacterPreview,
     CurrentRun
@@ -13,8 +14,20 @@ import type {
 
 export function generateCharacterPreview(
     raceId: string,
-    genderId: CharacterGender
+    genderId: unknown,
+    permanentProgress?: PermanentProgress
 ): CharacterPreview {
+    if (
+        permanentProgress &&
+        !permanentProgress.unlockedRaceIds.includes(raceId)
+    ) {
+        throw new Error(`Race "${raceId}" is not unlocked.`);
+    }
+
+    if (!isCharacterGender(genderId)) {
+        throw new Error(`Invalid character gender: "${String(genderId)}".`);
+    }
+
     const runSeed = createRunSeed();
     const random = createRunRandom(runSeed);
     const race = getRace(raceId);
@@ -22,7 +35,8 @@ export function generateCharacterPreview(
     const character = createCharacter(
         race,
         genderId,
-        random.character
+        random.character,
+        permanentProgress
     );
 
     return {

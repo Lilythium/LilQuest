@@ -8,6 +8,7 @@ import {
     type EquipmentRarity
 } from "../equipment/types";
 import type { GameSave } from "./types";
+import { isCharacterGender } from "../character/naming/types";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
     return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -138,10 +139,7 @@ function validateCharacter(value: unknown, path: string): void {
     expectNonEmptyString(value.id, `${path}.id`);
     expectNonEmptyString(value.name, `${path}.name`);
     expectNonEmptyString(value.raceId, `${path}.raceId`);
-    if (
-        typeof value.genderId !== "string" ||
-        !["masculine", "feminine", "neutral"].includes(value.genderId)
-    ) {
+    if (!isCharacterGender(value.genderId)) {
         throw new Error(`Invalid GameSave: "${path}.genderId" is not a valid character gender.`);
     }
     if (value.classId !== undefined) {
