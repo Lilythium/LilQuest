@@ -17,6 +17,7 @@ export function createValidGameSave(): GameSave {
         currentRun: {
             runId: "test-run",
             runSeed: "test-seed",
+            currentState: "active",
 
             randomStates: {
                 character: 0,

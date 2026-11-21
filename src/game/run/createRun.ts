@@ -18,10 +18,7 @@ export function generateCharacterPreview(
     genderId: unknown,
     permanentProgress: PermanentProgress
 ): CharacterPreview {
-    if (
-        permanentProgress &&
-        !permanentProgress.unlockedRaceIds.includes(raceId)
-    ) {
+    if (!permanentProgress.unlockedRaceIds.includes(raceId)) {
         throw new Error(`Race "${raceId}" is not unlocked.`);
     }
 
@@ -38,7 +35,6 @@ export function generateCharacterPreview(
         race,
         genderId,
         random.character,
-        permanentProgress,
         runBonuses
     );
 
@@ -56,7 +52,7 @@ export function createRun(
         runId: crypto.randomUUID(),
         runSeed: preview.runSeed,
         randomStates: preview.randomStates,
-        currentState: "preliminary",
+        currentState: "active",
         character: preview.character,
         worldProgress: []
     };

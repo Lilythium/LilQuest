@@ -72,14 +72,13 @@ describe("generateCharacterPreview", () => {
             getRace("human"),
             "neutral",
             random.character,
-            permanentProgress
+            { startingGold: 0, bonusMaxHealth: 0 }
         );
         const bonusRandom = createRunRandom("bonus-test");
         const character = createCharacter(
             getRace("human"),
             "neutral",
             bonusRandom.character,
-            permanentProgress,
             { startingGold: 25, bonusMaxHealth: 10 }
         );
 

@@ -3,7 +3,7 @@ import type { RandomStream } from "../random/seed";
 
 export type RandomStates = Record<RandomStream, number>;
 
-export type RunState = "preliminary" | "active" | "terminated";
+export type RunState = "active" | "inactive";
 
 export interface WorldProgress {
     worldId: string;

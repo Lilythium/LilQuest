@@ -11,50 +11,14 @@ import {
 } from "./types";
 import { calculateDerivedStats } from "./derivedStats";
 import type {RaceContent} from "../../data/races/types";
-import type { PermanentProgress } from "../progression/types";
 import type { RunBonuses } from "../progression/resolveRunBonuses";
 
-const EMPTY_RUN_BONUSES: RunBonuses = {
-    startingGold: 0,
-    bonusMaxHealth: 0
-};
-
 export function createCharacter(
     race: RaceContent,
     genderId: CharacterGender,
     rng: RandomGenerator,
-    permanentProgress: PermanentProgress,
-    runBonuses?: RunBonuses
-): Character;
-
-export function createCharacter(
-    race: RaceContent,
-    genderId: CharacterGender,
-    rng: RandomGenerator,
-    runBonuses: RunBonuses,
-    permanentProgress: PermanentProgress
-): Character;
-
-export function createCharacter(
-    race: RaceContent,
-    genderId: CharacterGender,
-    rng: RandomGenerator,
-    fourth: PermanentProgress | RunBonuses,
-    fifth?: RunBonuses | PermanentProgress
+    runBonuses: RunBonuses
 ): Character {
-    const permanentProgress = "unlockedRaceIds" in fourth
-        ? fourth
-        : fifth as PermanentProgress;
-    const runBonuses = "unlockedRaceIds" in fourth
-        ? (fifth as RunBonuses | undefined) ?? EMPTY_RUN_BONUSES
-        : fourth;
-
-    if (
-        !permanentProgress.unlockedRaceIds.includes(race.definition.id)
-    ) {
-        throw new Error(`Race "${race.definition.id}" is not unlocked.`);
-    }
-
     const id = crypto.randomUUID();
 
     const name = generateName(
