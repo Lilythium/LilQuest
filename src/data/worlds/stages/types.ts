@@ -1,6 +1,7 @@
 export type StageReference = {
     stageId: string;
     unlockId?: string;
+    optional?: boolean;
 };
 
 export interface StageDifficulty {
@@ -28,5 +29,5 @@ export interface StageDefinition {
     description: string;
     difficulty: StageDifficulty;
     mapGeneration: StageMapGenerationConfig;
-    contentOverrides: StageContentOverrides;
+    contentOverrides?: StageContentOverrides;
 }
