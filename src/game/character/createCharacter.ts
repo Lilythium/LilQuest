@@ -12,15 +12,44 @@ import {
 import { calculateDerivedStats } from "./derivedStats";
 import type {RaceContent} from "../../data/races/types";
 import type { PermanentProgress } from "../progression/types";
+import type { RunBonuses } from "../progression/resolveRunBonuses";
+
+const EMPTY_RUN_BONUSES: RunBonuses = {
+    startingGold: 0,
+    bonusMaxHealth: 0
+};
 
 export function createCharacter(
     race: RaceContent,
     genderId: CharacterGender,
     rng: RandomGenerator,
-    permanentProgress?: PermanentProgress
+    permanentProgress: PermanentProgress,
+    runBonuses?: RunBonuses
+): Character;
+
+export function createCharacter(
+    race: RaceContent,
+    genderId: CharacterGender,
+    rng: RandomGenerator,
+    runBonuses: RunBonuses,
+    permanentProgress: PermanentProgress
+): Character;
+
+export function createCharacter(
+    race: RaceContent,
+    genderId: CharacterGender,
+    rng: RandomGenerator,
+    fourth: PermanentProgress | RunBonuses,
+    fifth?: RunBonuses | PermanentProgress
 ): Character {
+    const permanentProgress = "unlockedRaceIds" in fourth
+        ? fourth
+        : fifth as PermanentProgress;
+    const runBonuses = "unlockedRaceIds" in fourth
+        ? (fifth as RunBonuses | undefined) ?? EMPTY_RUN_BONUSES
+        : fourth;
+
     if (
-        permanentProgress &&
         !permanentProgress.unlockedRaceIds.includes(race.definition.id)
     ) {
         throw new Error(`Race "${race.definition.id}" is not unlocked.`);
@@ -36,6 +65,12 @@ export function createCharacter(
 
     const attributes = generateStartingAttributes(rng, race.definition.attributeMultipliers);
     const secondaryStats = generateStartingSecondaryStats(race.definition.secondaryStatModifiers);
+    const baseMaxHealth = calculateDerivedStats(
+        attributes,
+        secondaryStats,
+        0,
+        0
+    ).maxHealth;
 
     return {
         id,
@@ -44,12 +79,12 @@ export function createCharacter(
         genderId,
         level: 1,
         experience: 0,
-        gold: 0,
+        gold: runBonuses.startingGold,
         attributes: attributes,
         secondaryStats: secondaryStats,
         inventory: [], //TODO weapon generation - generate start weapon here
         equipment: {},
-        currentHealth: calculateDerivedStats(attributes, secondaryStats, 0, 0).maxHealth,
+        currentHealth: baseMaxHealth + runBonuses.bonusMaxHealth,
         encounterStats: null,
         learnedSkillIds: [],
         activeSkillIds: [],

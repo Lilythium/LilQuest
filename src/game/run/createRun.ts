@@ -7,6 +7,7 @@ import { createRunSeed } from "../random/seed";
 import { getRace } from "../../data/races";
 import { isCharacterGender } from "../character/naming/types";
 import type { PermanentProgress } from "../progression/types";
+import { resolveRunBonuses } from "../progression/resolveRunBonuses";
 import type {
     CharacterPreview,
     CurrentRun
@@ -15,7 +16,7 @@ import type {
 export function generateCharacterPreview(
     raceId: string,
     genderId: unknown,
-    permanentProgress?: PermanentProgress
+    permanentProgress: PermanentProgress
 ): CharacterPreview {
     if (
         permanentProgress &&
@@ -31,12 +32,14 @@ export function generateCharacterPreview(
     const runSeed = createRunSeed();
     const random = createRunRandom(runSeed);
     const race = getRace(raceId);
+    const runBonuses = resolveRunBonuses(permanentProgress);
 
     const character = createCharacter(
         race,
         genderId,
         random.character,
-        permanentProgress
+        permanentProgress,
+        runBonuses
     );
 
     return {
