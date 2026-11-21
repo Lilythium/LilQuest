@@ -36,7 +36,7 @@ export function createRng(
 
     if (
         initialState !== undefined &&
-        (!Number.isInteger(initialState) ||
+        (!Number.isSafeInteger(initialState) ||
             initialState < 0 ||
             initialState > 0xFFFFFFFF)
     ) {

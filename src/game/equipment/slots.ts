@@ -12,17 +12,19 @@ export type EquipmentSlotType =
 export type EquipmentCategory = "weapon" | "armour" | "accessory";
 export type EquipmentSlotFilter = EquipmentSlotType | EquipmentCategory;
 
-export type CharacterEquipmentSlot =
-    | "helm"
-    | "chestplate"
-    | "greaves"
-    | "boots"
-    | "amulet"
-    | "main-hand"
-    | "off-hand"
-    | "left-ring"
-    | "right-ring";
+export const EQUIPMENT_SLOTS = [
+    "helm",
+    "chestplate",
+    "greaves",
+    "boots",
+    "amulet",
+    "main-hand",
+    "off-hand",
+    "left-ring",
+    "right-ring"
+] as const;
 
+export type CharacterEquipmentSlot = typeof EQUIPMENT_SLOTS[number];
 export type EquipmentSlot = CharacterEquipmentSlot;
 
 export const characterEquipmentSlotTypes = {

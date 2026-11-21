@@ -3,7 +3,35 @@ import type {
     EquipmentSlotFilter,
     EquipmentSlotType
 } from "./slots";
-import type { Attributes, SecondaryStats } from "../character/types";
+
+export const EQUIPMENT_RARITIES = [
+    "common",
+    "uncommon",
+    "rare",
+    "epic",
+    "legendary",
+    "unique"
+] as const;
+
+export type EquipmentRarity = typeof EQUIPMENT_RARITIES[number];
+
+export const EQUIPMENT_MODIFIER_STATS = [
+    "strength",
+    "dexterity",
+    "constitution",
+    "intelligence",
+    "wisdom",
+    "charisma",
+    "luck",
+    "healthRegen",
+    "critChance",
+    "critMultiplier",
+    "armour",
+    "magicResistance",
+    "damageReduction"
+] as const;
+
+export type EquipmentModifierStat = typeof EQUIPMENT_MODIFIER_STATS[number];
 
 export interface EquipmentDefinition {
     id: string;
@@ -70,14 +98,6 @@ export interface QualityPrefix {
     allowedSlots?: readonly EquipmentSlotFilter[];
     spawnWeight: number;
 }
-export type EquipmentRarity =
-    | "common"
-    | "uncommon"
-    | "rare"
-    | "epic"
-    | "legendary"
-    | "unique";
-
 export interface RarityConfig {
     additionalAttributeCount: number;
     dropWeight: number;
@@ -114,13 +134,6 @@ export interface StatModifier<T extends string> {
     stat: T;
     value: number;
 }
-
-export type EquipmentModifierStat =
-    | keyof Attributes
-    | keyof SecondaryStats
-    | "armour"
-    | "magicResistance"
-    | "damageReduction";
 
 export interface EquipmentStatModifier {
     stat: EquipmentModifierStat;

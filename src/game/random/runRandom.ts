@@ -11,6 +11,10 @@ export function createRunRandom(
     runSeed: string,
     savedStates?: RandomStates
 ): RunRandomStreams {
+    if (!runSeed) {
+        throw new Error("A run seed is required.");
+    }
+
     const random = {} as RunRandomStreams;
 
     for (const stream of RANDOM_STREAMS) {
