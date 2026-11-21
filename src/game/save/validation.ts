@@ -226,9 +226,7 @@ function validateCurrentRun(value: unknown): void {
 
 export function assertValidGameSave(value: unknown): asserts value is GameSave {
     expectObject(value, "save");
-    if (typeof value.saveId !== "string" || value.saveId.length === 0) {
-        throw new Error(`Invalid GameSave: "saveId" must be a non-empty string.`);
-    }
+    expectNonEmptyString(value.saveId, "save.saveId");
     if (value.schemaVersion !== 1) {
         throw new Error(`Invalid GameSave: "schemaVersion" must be 1.`);
     }
