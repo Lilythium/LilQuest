@@ -27,19 +27,24 @@ export const EQUIPMENT_SLOTS = [
 export type CharacterEquipmentSlot = typeof EQUIPMENT_SLOTS[number];
 export type EquipmentSlot = CharacterEquipmentSlot;
 
-export const characterEquipmentSlotTypes = {
+type CharacterEquipmentSlotTypes = Record<
+    CharacterEquipmentSlot,
+    EquipmentSlotType | readonly EquipmentSlotType[]
+>;
+
+export const CHARACTER_EQUIPMENT_SLOT_TYPES = {
     helm: "helm",
     chestplate: "chestplate",
     greaves: "greaves",
     boots: "boots",
     amulet: "amulet",
     "main-hand": "weapon",
-    "off-hand": "weapon",
+    "off-hand": ["weapon", "shield"],
     "left-ring": "ring",
     "right-ring": "ring"
-} as const satisfies Record<CharacterEquipmentSlot, EquipmentSlotType>;
+} as const satisfies CharacterEquipmentSlotTypes;
 
-export const equipmentSlotCategories = {
+export const EQUIPMENT_SLOT_CATEGORIES = {
     helm: "armour",
     chestplate: "armour",
     greaves: "armour",
@@ -53,7 +58,7 @@ export const equipmentSlotCategories = {
 export function getEquipmentCategory(
     equipmentSlotType: EquipmentSlotType
 ): EquipmentCategory {
-    return equipmentSlotCategories[equipmentSlotType];
+    return EQUIPMENT_SLOT_CATEGORIES[equipmentSlotType];
 }
 
 export function equipmentSlotMatchesFilter(
@@ -67,5 +72,8 @@ export function canEquipInCharacterSlot(
     equipmentSlotType: EquipmentSlotType,
     characterSlot: CharacterEquipmentSlot
 ): boolean {
-    return characterEquipmentSlotTypes[characterSlot] === equipmentSlotType;
+    const slotTypes = CHARACTER_EQUIPMENT_SLOT_TYPES[characterSlot];
+    return Array.isArray(slotTypes)
+        ? slotTypes.includes(equipmentSlotType)
+        : slotTypes === equipmentSlotType;
 }

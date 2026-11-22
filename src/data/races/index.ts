@@ -1,21 +1,21 @@
-import { elfRace, elfNames } from "./elf";
-import { humanRace, humanNames } from "./human";
-import { orcRace, orcNames } from "./orc";
+import { ElfRace, ElfNames } from "./elf";
+import { HumanRace, HumanNames } from "./human";
+import { OrcRace, OrcNames } from "./orc";
 
 import type { RaceContent } from "./types";
 
 export const RACES: Record<string, RaceContent> = {
     elf: {
-        definition: elfRace,
-        namingRules: elfNames
+        definition: ElfRace,
+        namingRules: ElfNames
     },
     human: {
-        definition: humanRace,
-        namingRules: humanNames
+        definition: HumanRace,
+        namingRules: HumanNames
     },
     orc: {
-        definition: orcRace,
-        namingRules: orcNames
+        definition: OrcRace,
+        namingRules: OrcNames
     }
 };
 

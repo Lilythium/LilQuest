@@ -2,9 +2,9 @@ import type { StatusEffectDefinition } from "./types";
 import * as effects from "./effects";
 
 export const STATUS_EFFECTS: Record<string, StatusEffectDefinition> = {
-    [effects.bulwark.id]: effects.bulwark,
-    [effects.sideStep.id]: effects.sideStep,
-    [effects.slowed.id]: effects.slowed
+    [effects.Bulwark.id]: effects.Bulwark,
+    [effects.Sidestep.id]: effects.Sidestep,
+    [effects.Slowed.id]: effects.Slowed
 };
 
 export function getStatusEffect(statusEffectId: string): StatusEffectDefinition {

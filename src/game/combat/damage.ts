@@ -1,5 +1,5 @@
 import type { DerivedStats } from "../character/derivedStats";
-import type { DamageType } from "../skills/types";
+import type { DamageType } from "../../data/skills/types";
 
 const ARMOUR_EFFECTIVENESS: Record<
     Exclude<DamageType, "true" | "magic">,

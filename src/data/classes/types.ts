@@ -9,7 +9,7 @@ export interface ClassDefinition {
     allowedRaceIds?: string[];
 
     /** All listed requirements must be satisfied. */
-    unlockRequirements?: UnlockDefinition[];
+    unlocks?: UnlockDefinition[];
 
     /** The single skill granted by this class. */
     classSkillId: string;

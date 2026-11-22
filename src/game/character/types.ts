@@ -1,4 +1,4 @@
-import type { CharacterEquipment, EquipmentInstance } from "../equipment/types";
+import type { CharacterEquipment, EquipmentInstance } from "../../data/equipment/types";
 import type { CharacterGender } from "./naming/types";
 
 export interface Attributes {

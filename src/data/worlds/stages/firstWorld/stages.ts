@@ -1,7 +1,7 @@
 
 import type { StageDefinition } from "../types";
 
-export const firstWorldStages: StageDefinition[] = [
+export const FirstWorldStages: StageDefinition[] = [
     // ROLLING HILLS
     {
         id: "rolling-hills",

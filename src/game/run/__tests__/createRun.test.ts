@@ -1,14 +1,14 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { RANDOM_STREAMS } from "../random/seed";
+import { RANDOM_STREAMS } from "../../random/seed";
 import {
     createRun,
     generateCharacterPreview
-} from "./createRun";
-import type { PermanentProgress } from "../progression/types";
-import { isCharacterGender } from "../character/naming/types";
-import { createCharacter } from "../character/createCharacter";
-import { getRace } from "../../data/races";
-import { createRunRandom } from "../random/runRandom";
+} from "../createRun";
+import type { PermanentProgress } from "../../progression/types";
+import { isCharacterGender } from "../../character/naming/types";
+import { createCharacter } from "../../character/createCharacter";
+import { getRace } from "../../../data/races";
+import { createRunRandom } from "../../random/runRandom";
 
 const permanentProgress: PermanentProgress = {
     prestigeCount: 0,

@@ -1,6 +1,6 @@
-import type { EquipmentDefinition } from "../../../game/equipment/types";
+import type { EquipmentDefinition } from "../types";
 
-export const amuletOfFortune: EquipmentDefinition = {
+export const AmuletOfFortune: EquipmentDefinition = {
     id: "amulet-of-fortune",
     name: "Amulet of Fortune",
     description: "An amulet that brings good luck to its wearer.",

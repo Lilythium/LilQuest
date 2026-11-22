@@ -1,7 +1,7 @@
 import type { RaceNameRules } from "../../game/character/naming/types";
 import type { RaceDefinition } from "./types";
 
-export const orcRace: RaceDefinition = {
+export const OrcRace: RaceDefinition = {
     id: "orc",
     name: "Orc",
     description: "Orcs are a strong and resilient race, known for their combat prowess and tribal culture.",
@@ -17,7 +17,7 @@ export const orcRace: RaceDefinition = {
     startingWeaponId: "oak-cudgel"
 };
 
-export const orcNames = {
+export const OrcNames = {
     genderExempt: true,
     firstName: {
         method: "generated",

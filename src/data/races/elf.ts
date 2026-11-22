@@ -1,7 +1,7 @@
 import type { RaceNameRules } from "../../game/character/naming/types";
 import type { RaceDefinition } from "./types";
 
-export const elfRace: RaceDefinition = {
+export const ElfRace: RaceDefinition = {
     id: "elf",
     name: "Elf",
     description: "Elves are a mystical and ancient race, known for their grace, longevity, and affinity with nature. They possess keen senses and a deep connection to the magical forces of the world.",
@@ -17,7 +17,7 @@ export const elfRace: RaceDefinition = {
     startingWeaponId: "split-wood-bow",
 };
 
-export const elfNames = {
+export const ElfNames = {
     genderExempt: false,
     firstName: {
         method: "generated",

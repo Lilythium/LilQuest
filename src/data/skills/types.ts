@@ -1,26 +1,30 @@
-import type { Attributes } from "../character/types";
+import type { Attributes } from "../../game/character/types";
 
-export type DamageType = 
-"blunt" | "piercing" | "slashing" | "magic" | "true"
+export type DamageType =
+    | "blunt"
+    | "piercing"
+    | "slashing"
+    | "magic"
+    | "true";
 
 export type SkillType =
-    | "AttackSkill"
-    | "HealingSkill"
-    | "EffectSkill"
-    | "StatSkill"
-    | "CompositeSkill";
+    | "attack"
+    | "healing"
+    | "effect"
+    | "stat"
+    | "composite";
 
-export interface Skill {
+export interface SkillDefinition {
     id: string;
     name: string;
     description: string;
-}
-
-export interface AttackSkill extends Skill {
-    type: "attack";
-    baseDamage: number;
     staminaCost: number;
     cooldown: number;
+}
+
+export interface AttackSkill extends SkillDefinition {
+    type: "attack";
+    baseDamage: number;
     damageType: DamageType;
 
     scaling: {
@@ -29,11 +33,9 @@ export interface AttackSkill extends Skill {
     };
 }
 
-export interface HealingSkill extends Skill {
+export interface HealingSkill extends SkillDefinition {
     type: "healing";
     baseHealing: number;
-    staminaCost: number;
-    cooldown: number;
 
     scaling: {
         attribute: keyof Attributes;
@@ -41,23 +43,22 @@ export interface HealingSkill extends Skill {
     };
 }
 
-export interface EffectSkill extends Skill {
+export type Target = "self" | "target";
+
+export interface EffectSkill extends SkillDefinition {
     type: "effect";
     effectId: string;
-    target: "self" | "enemy";
-    staminaCost: number;
-    cooldown: number;
+    target: Target;
     effectStacks: number;
 }
 
-export type StatTarget = "self" | "target";
+export type StatTarget = Target;
 
 export interface StatReference {
     target: StatTarget;
     stat: string; // ideally keyof Stats
 }
 
-// Modifiers change the stat they point at. Negative values reduce it.
 export interface FlatModifier {
     id: string;
     type: "flat";
@@ -82,21 +83,26 @@ export interface PreviousTransfer {
 
 export type StatStep = FlatModifier | RatioModifier | PreviousTransfer;
 
-export interface StatSkill extends Skill {
+export interface StatSkill extends SkillDefinition {
     type: "stat";
     staminaCost: number;
     cooldown: number;
     transfers: StatStep[]; // applied in order
 }
 
-export interface CompositeSkill extends Skill {
+export interface CompositeSkill extends SkillDefinition {
     type: "composite";
     allowedSkillTypes: SkillType[];
-    staminaCost: number;
-    cooldown: number;
     scaling?: {
         attribute: keyof Attributes;
         coefficient: number;
     };
     effectIds?: string[];
 }
+
+export type AnySkill =
+    | AttackSkill
+    | HealingSkill
+    | EffectSkill
+    | StatSkill
+    | CompositeSkill;

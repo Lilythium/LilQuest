@@ -1,9 +1,9 @@
 import type { ClassDefinition } from "./types";
 
-export const priest: ClassDefinition = {
+export const Priest: ClassDefinition = {
     id: "priest",
     name: "Priest",
     description: "A holy servant of the divine, blessed with the power to heal and protect.",
-    classSkillId: "mend", // TODO: implement skill
+    classSkillId: "mend",
     allowedRaceIds: ["human", "elf"],
 };

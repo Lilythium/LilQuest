@@ -1,20 +1,24 @@
-import type { AttackSkill, Skill } from "../../game/skills/types";
-import { slash, simpleShot, bludgeon } from "./equipmentSkills";
-import { mend, bulwark, sidestep, recklessAbandon, sap} from "./classSkills";
+import type { AnySkill } from "./types";
+import { Slash, SimpleShot, Bludgeon } from "./equipmentSkills";
+import { Mend, Bulwark, Sidestep, RecklessAbandon, Sap } from "./classSkills";
 
-export const SKILLS: Record<string, Skill> = {
-    [slash.id]: slash,
-    [simpleShot.id]: simpleShot,
-    [bludgeon.id]: bludgeon,
-    [mend.id]: mend,
-    [bulwark.id]: bulwark,
-    [sidestep.id]: sidestep,
-    [recklessAbandon.id]: recklessAbandon,
-    [sap.id]: sap
+export const SKILLS: Record<string, AnySkill> = {
+    [Slash.id]: Slash,
+    [SimpleShot.id]: SimpleShot,
+    [Bludgeon.id]: Bludgeon,
+    [Mend.id]: Mend,
+    [Bulwark.id]: Bulwark,
+    [Sidestep.id]: Sidestep,
+    [RecklessAbandon.id]: RecklessAbandon,
+    [Sap.id]: Sap
 };
 
-export function getSkillById(
-    id: string
-): Skill | undefined {
-    return SKILLS[id];
+export function getSkill(skillId: string): AnySkill {
+    const skill = SKILLS[skillId];
+
+    if (!skill) {
+        throw new Error(`Skill "${skillId}" does not exist.`);
+    }
+
+    return skill;
 }

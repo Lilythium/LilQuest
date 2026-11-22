@@ -1,8 +1,8 @@
 import type { RaceNameRules } from "../../game/character/naming/types";
-import { humanAdaptability } from "../traits/human";
+import { HumanAdaptability } from "../traits/human";
 import type { RaceDefinition } from "./types";
 
-export const humanRace: RaceDefinition = {
+export const HumanRace: RaceDefinition = {
     id: "human",
     name: "Human",
     description: "Humans are a versatile and adaptable race, known for their resilience and ability to thrive in various environments.",
@@ -14,11 +14,11 @@ export const humanRace: RaceDefinition = {
         wisdom: 1,
         charisma: 1
     },
-    startingTraitId: humanAdaptability.id,
+    startingTraitId: HumanAdaptability.id,
     startingWeaponId: "short-iron",
 };
 
-export const humanNames = {
+export const HumanNames = {
     genderExempt: false,
     firstName: {
         method: "fixed",
@@ -55,5 +55,3 @@ export const humanNames = {
         }
     }
 } as const satisfies RaceNameRules;
-
-export { humanAdaptability };

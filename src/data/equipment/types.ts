@@ -2,7 +2,7 @@ import type {
     CharacterEquipmentSlot,
     EquipmentSlotFilter,
     EquipmentSlotType
-} from "./slots";
+} from "../../game/equipment/slots";
 
 export const EQUIPMENT_RARITIES = [
     "common",
@@ -98,12 +98,13 @@ export interface QualityPrefix {
     allowedSlots?: readonly EquipmentSlotFilter[];
     spawnWeight: number;
 }
+
 export interface RarityConfig {
     additionalAttributeCount: number;
     dropWeight: number;
 }
 
-export const rarityConfig: Record<EquipmentRarity, RarityConfig> = {
+export const RARITY_CONFIG: Record<EquipmentRarity, RarityConfig> = {
     common: {
         additionalAttributeCount: 0,
         dropWeight: 100

@@ -6,7 +6,7 @@ import {
     EQUIPMENT_RARITIES,
     type EquipmentModifierStat,
     type EquipmentRarity
-} from "../equipment/types";
+} from "../../data/equipment/types";
 import type { GameSave } from "./types";
 import { isCharacterGender } from "../character/naming/types";
 

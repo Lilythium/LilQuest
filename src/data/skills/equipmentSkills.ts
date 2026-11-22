@@ -1,6 +1,6 @@
-import type { AttackSkill } from "../../game/skills/types";
+import type { AttackSkill } from "./types";
 
-export const slash: AttackSkill = {
+export const Slash: AttackSkill = {
     type: "attack",
     id: "slash",
     name: "Slash",
@@ -15,7 +15,7 @@ export const slash: AttackSkill = {
     }
 };
 
-export const simpleShot: AttackSkill = {
+export const SimpleShot: AttackSkill = {
     type: "attack",
     id: "simple-shot",
     name: "Simple Shot",
@@ -30,7 +30,7 @@ export const simpleShot: AttackSkill = {
     }
 };
 
-export const bludgeon: AttackSkill = {
+export const Bludgeon: AttackSkill = {
     type: "attack",
     id: "bludgeon",
     name: "Bludgeon",

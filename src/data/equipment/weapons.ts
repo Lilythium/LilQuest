@@ -1,4 +1,4 @@
-import type { HandheldEquipmentDefinition } from "../../game/equipment/types";
+import type { HandheldEquipmentDefinition } from "./types";
 
 export const ShortIron: HandheldEquipmentDefinition = {
     id: "short-iron",
@@ -25,7 +25,7 @@ export const SplitWoodBow: HandheldEquipmentDefinition = {
         value: 5
     },
     secondaryModifierPool: ["strength", "critChance", "critMultiplier"],
-    skill: "simpleShot",
+    skill: "simple-shot",
     weight: 1.5
 };
 

@@ -1,6 +1,6 @@
-import type { ArmourSetDefinition } from "../../../../game/equipment/types";
+import type { ArmourSetDefinition } from "../../types";
 
-export const leatherSet: ArmourSetDefinition = {
+export const LeatherSet: ArmourSetDefinition = {
     id: "leather-set",
     name: "Leather Set",
     description: "A set of leather armour.",

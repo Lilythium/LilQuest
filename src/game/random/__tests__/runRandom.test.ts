@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
     captureRandomStates,
     createRunRandom
-} from "./runRandom";
+} from "../runRandom";
 
 describe("runRandom", () => {
     it("produces deterministic sequences from the same run seed", () => {

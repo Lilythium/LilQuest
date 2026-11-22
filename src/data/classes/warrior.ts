@@ -1,6 +1,6 @@
 import type { ClassDefinition } from "./types";
 
-export const warrior: ClassDefinition = {
+export const Warrior: ClassDefinition = {
     id: "warrior",
     name: "Warrior",
     description: "A strong and resilient fighter, excelling in melee combat.",

@@ -1,6 +1,6 @@
-import type { ArmourSetDefinition } from "../../../../game/equipment/types";
+import type { ArmourSetDefinition } from "../../types";
 
-export const ironSet: ArmourSetDefinition = {
+export const IronSet: ArmourSetDefinition = {
     id: "iron-set",
     name: "Iron Set",
     description: "A set of iron armour.",

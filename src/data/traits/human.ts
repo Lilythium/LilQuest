@@ -1,6 +1,6 @@
-import type { Trait } from "../../game/traits/types";
+import type { TraitDefinition } from "./types";
 
-export const humanAdaptability: Trait = {
+export const HumanAdaptability: TraitDefinition = {
     id: "human-adaptability",
     name: "Adaptability",
     description: "Gain 10% more experience.",

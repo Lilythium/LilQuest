@@ -1,15 +1,15 @@
 
 import type { WorldDefinition, WorldContentProfile } from "./types";
 
-export const firstWorldContent: WorldContentProfile = {
+export const FirstWorldContent: WorldContentProfile = {
     basicEnemyPoolId: "forest-basic-enemies",
     eliteEnemyPoolId: "forest-elite-enemies",
     miniBossPoolId: "forest-mini-bosses",
-    bossId: "TBD",
+    bossId: "forest-guardian",
     equipmentPoolId: "beginner-equipment"
 };
 
-export const firstWorld: WorldDefinition = {
+export const FirstWorld: WorldDefinition = {
     id: "greener-pastures",
     name: "Greener Pastures",
     description: "A lush and vibrant world filled with rolling hills, dense forests, and sparkling rivers.",
@@ -20,6 +20,6 @@ export const firstWorld: WorldDefinition = {
         { stageId: "sparkling-river" },
         { stageId: "forest-boss" }
     ],
-    content: firstWorldContent,
+    content: FirstWorldContent,
     baseDifficulty: 1
 };

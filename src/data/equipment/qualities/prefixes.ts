@@ -1,8 +1,8 @@
-import type { QualityPrefix } from "../../../game/equipment/types";
+import type { QualityPrefix } from "../types";
 
 // ---------- POSITIVE QUALITY PREFIXES ----------
 
-export const shiny: QualityPrefix = {
+export const Shiny: QualityPrefix = {
     id: "shiny",
     name: "Shiny",
     description: "Provides additional charisma.",
@@ -13,7 +13,7 @@ export const shiny: QualityPrefix = {
     }
 };
 
-export const sharp: QualityPrefix = {
+export const Sharp: QualityPrefix = {
     id: "sharp",
     name: "Sharp",
     description: "Provides additional Strength.",
@@ -25,7 +25,7 @@ export const sharp: QualityPrefix = {
     allowedSlots: ["weapon"]
 };
 
-export const sturdy: QualityPrefix = {
+export const Sturdy: QualityPrefix = {
     id: "sturdy",
     name: "Sturdy",
     description: "Provides additional constitution.",
@@ -37,7 +37,7 @@ export const sturdy: QualityPrefix = {
     allowedSlots: ["armour"]
 };
 
-export const agile: QualityPrefix = {
+export const Agile: QualityPrefix = {
     id: "agile",
     name: "Agile",
     description: "Provides additional dexterity.",
@@ -49,7 +49,7 @@ export const agile: QualityPrefix = {
     allowedSlots: ["accessory"]
 };
 
-export const scholarly: QualityPrefix = {
+export const Scholarly: QualityPrefix = {
     id: "scholarly",
     name: "Scholarly",
     description: "Provides additional intelligence.",
@@ -61,7 +61,7 @@ export const scholarly: QualityPrefix = {
     allowedSlots: ["helm", "accessory"]
 };
 
-export const perceptive: QualityPrefix = {
+export const Perceptive: QualityPrefix = {
     id: "perceptive",
     name: "Perceptive",
     description: "Provides additional wisdom.",
@@ -73,7 +73,7 @@ export const perceptive: QualityPrefix = {
     allowedSlots: ["helm", "accessory"]
 };
 
-export const commanding: QualityPrefix = {
+export const Commanding: QualityPrefix = {
     id: "commanding",
     name: "Commanding",
     description: "Provides additional charisma.",
@@ -86,7 +86,7 @@ export const commanding: QualityPrefix = {
     allowedSlots: ["helm", "accessory"]
 };
 
-export const godly: QualityPrefix = {
+export const Godly: QualityPrefix = {
     id: "godly",
     name: "Godly",
     description: "All base attributes up",
@@ -104,7 +104,7 @@ export const godly: QualityPrefix = {
 
 // ---------- MIXED QUALITY PREFIXES ----------
 
-export const volatile: QualityPrefix = {
+export const Volatile: QualityPrefix = {
     id: "volatile",
     name: "Volatile",
     description: "Provides additional strength but reduces constitution.",
@@ -117,7 +117,7 @@ export const volatile: QualityPrefix = {
     allowedSlots: ["weapon"]
 };
 
-export const nimble: QualityPrefix = {
+export const Nimble: QualityPrefix = {
     id: "nimble",
     name: "Nimble",
     description: "Provides additional dexterity but reduces strength.",
@@ -130,7 +130,7 @@ export const nimble: QualityPrefix = {
     allowedSlots: ["accessory", "greaves"]
 };
 
-export const arcane: QualityPrefix = {
+export const Arcane: QualityPrefix = {
     id: "arcane",
     name: "Arcane",
     description: "Provides additional intelligence but reduces wisdom.",
@@ -143,7 +143,7 @@ export const arcane: QualityPrefix = {
     allowedSlots: ["helm", "accessory"]
 };
 
-export const godlessArmour: QualityPrefix = {
+export const GodlessArmour: QualityPrefix = {
     id: "godless-armour",
     name: "Godless",
     description: "Constitution up dexterity down",
@@ -156,7 +156,7 @@ export const godlessArmour: QualityPrefix = {
     allowedSlots: ["armour"]
 };
 
-export const godlessWeapon: QualityPrefix = {
+export const GodlessWeapon: QualityPrefix = {
     id: "godless-weapon",
     name: "Godless",
     description: "Strength up constitution down",
@@ -169,7 +169,7 @@ export const godlessWeapon: QualityPrefix = {
     allowedSlots: ["weapon"]
 };
 
-export const godlessAccessory: QualityPrefix = {
+export const GodlessAccessory: QualityPrefix = {
     id: "godless-accessory",
     name: "Godless",
     description: "Wisdom and intelligence up, constitution down",
@@ -185,7 +185,7 @@ export const godlessAccessory: QualityPrefix = {
 
 // ---------- NEGATIVE QUALITY PREFIXES ----------
 
-export const brittle: QualityPrefix = {
+export const Brittle: QualityPrefix = {
     id: "brittle",
     name: "Brittle",
     description: "Reduces constitution.",
@@ -197,7 +197,7 @@ export const brittle: QualityPrefix = {
     allowedSlots: ["armour"]
 };
 
-export const brittleWeapon: QualityPrefix = {
+export const BrittleWeapon: QualityPrefix = {
     id: "brittle-weapon",
     name: "Brittle",
     description: "Reduces dexterity.",
@@ -209,7 +209,7 @@ export const brittleWeapon: QualityPrefix = {
     allowedSlots: ["weapon"]
 };
 
-export const dull: QualityPrefix = {
+export const Dull: QualityPrefix = {
     id: "dull",
     name: "Dull",
     description: "Reduces strength.",
@@ -221,7 +221,7 @@ export const dull: QualityPrefix = {
     allowedSlots: ["weapon"]
 };
 
-export const cumbersome: QualityPrefix = {
+export const Cumbersome: QualityPrefix = {
     id: "cumbersome",
     name: "Cumbersome",
     description: "Reduces dexterity.",
@@ -233,7 +233,7 @@ export const cumbersome: QualityPrefix = {
     allowedSlots: ["armour"]
 };
 
-export const cursed: QualityPrefix = {
+export const Cursed: QualityPrefix = {
     id: "cursed",
     name: "Cursed",
     description: "Reduces wisdom.",

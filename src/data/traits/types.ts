@@ -1,11 +1,11 @@
+import type { Target } from "../skills/types";
+
 export type TraitTrigger =
     | "on-win"
     | "on-hit"
     | "on-damage-taken";
 
-export type TraitTarget =
-    | "self"
-    | "enemy";
+export type TraitTarget = Target;
 
 export type TraitEffectType =
     | "experience-gain"
@@ -48,7 +48,7 @@ export type TraitEffect =
     | TraitActionEffect
     | TraitPropertyEffect;
 
-export interface Trait {
+export interface TraitDefinition {
     id: string;
     name: string;
     description: string;

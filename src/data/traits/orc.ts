@@ -1,6 +1,6 @@
-import type { Trait } from "../../game/traits/types";
+import type { TraitDefinition } from "./types";
 
-export const orcUnyielding: Trait = {
+export const OrcUnyielding: TraitDefinition = {
     id: "orc-unyielding",
     name: "Unyielding",
     description: "Immune to flinching from incoming attacks.",

@@ -1,6 +1,6 @@
-import type { HealingSkill, EffectSkill, StatSkill, CompositeSkill} from "../../game/skills/types";
+import type { HealingSkill, EffectSkill, StatSkill, CompositeSkill } from "./types";
 
-export const mend: HealingSkill = {
+export const Mend: HealingSkill = {
     type: "healing",
     id: "mend",
     name: "Mend",
@@ -14,7 +14,7 @@ export const mend: HealingSkill = {
     }
 };
 
-export const bulwark: EffectSkill = {
+export const Bulwark: EffectSkill = {
     type: "effect",
     id: "bulwark",
     name: "Bulwark",
@@ -26,7 +26,7 @@ export const bulwark: EffectSkill = {
     effectStacks: 1
 };
 
-export const sidestep: EffectSkill = {
+export const Sidestep: EffectSkill = {
     type: "effect",
     id: "sidestep",
     name: "Sidestep",
@@ -38,12 +38,12 @@ export const sidestep: EffectSkill = {
     effectStacks: 1
 };
 
-export const recklessAbandon: CompositeSkill = {
+export const RecklessAbandon: CompositeSkill = {
     type: "composite",
     id: "reckless-abandon",
     name: "Reckless Abandon",
     description: "Select an attack skill to use. The selected skill will do 2x damage but will slow the user.",
-    allowedSkillTypes: ["AttackSkill"],
+    allowedSkillTypes: ["attack"],
     staminaCost: 0,
     cooldown: 200,
     scaling: {
@@ -53,7 +53,7 @@ export const recklessAbandon: CompositeSkill = {
     effectIds: ["slowed"]
 };
 
-export const sap: StatSkill = {
+export const Sap: StatSkill = {
     type: "stat",
     id: "sap",
     name: "Sap",
