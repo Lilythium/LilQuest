@@ -13,9 +13,9 @@ const attributes: Attributes = {
 
 describe("speed derived stat", () => {
     it("scales speed by encumbrance tier", () => {
-        expect(DERIVED_STAT_FORMULAS.speed(attributes, "unencumbered")).toBe(10);
-        expect(DERIVED_STAT_FORMULAS.speed(attributes, "light")).toBe(9.5);
-        expect(DERIVED_STAT_FORMULAS.speed(attributes, "moderate")).toBe(7.5);
-        expect(DERIVED_STAT_FORMULAS.speed(attributes, "heavy")).toBe(5);
+        expect(DERIVED_STAT_FORMULAS.speed(attributes, "unencumbered")).toBeCloseTo(1.5);
+        expect(DERIVED_STAT_FORMULAS.speed(attributes, "light")).toBeCloseTo(1.425);
+        expect(DERIVED_STAT_FORMULAS.speed(attributes, "moderate")).toBeCloseTo(1.125);
+        expect(DERIVED_STAT_FORMULAS.speed(attributes, "heavy")).toBeCloseTo(0.75);
     });
 });

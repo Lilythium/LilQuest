@@ -4,6 +4,7 @@ import {
     ENCUMBRANCE_CONFIG,
     type EncumbranceTier
 } from "./encumbrance";
+import { DEXTERITY_SPEED_BONUS } from "../combat/constants";
 
 export interface DerivedStats {
     maxHealth: number;
@@ -12,8 +13,7 @@ export interface DerivedStats {
     healthRegen: number;
 
     carryingCapacity: number;
-    initiative: number;
-    speed: number;
+    speed: number; // initiative gain multiplier (1 = base pace)
 
     armour: number;
     magicResistance: number;
@@ -33,11 +33,8 @@ export const DERIVED_STAT_FORMULAS = {
     carryingCapacity: (attributes: Attributes) =>
         5 + attributes.strength * 1.5,
 
-    initiative: (attributes: Attributes) =>
-        attributes.dexterity,
-
     speed: (attributes: Attributes, encumbrance: EncumbranceTier) =>
-        attributes.dexterity
+        (1 + attributes.dexterity * DEXTERITY_SPEED_BONUS)
             * ENCUMBRANCE_CONFIG[encumbrance].speedMultiplier,
 
     armour: (equipmentArmour: number) =>
@@ -78,10 +75,6 @@ export function calculateDerivedStats(
         healthRegen: secondaryStats.healthRegen,
 
         carryingCapacity,
-
-        initiative:
-            DERIVED_STAT_FORMULAS.initiative(attributes)
-            - encumbranceConfig.initiativePenalty,
 
         speed: DERIVED_STAT_FORMULAS.speed(
             attributes,

@@ -9,7 +9,6 @@ export interface EncumbranceConfig {
     maxStaminaMultiplier: number;
     staminaRegenMultiplier: number;
     speedMultiplier: number;
-    initiativePenalty: number;
 }
 
 export const ENCUMBRANCE_CONFIG: Record<
@@ -20,29 +19,25 @@ export const ENCUMBRANCE_CONFIG: Record<
         maxLoadRatio: 0.7,
         maxStaminaMultiplier: 1,
         staminaRegenMultiplier: 1,
-        speedMultiplier: 1,
-        initiativePenalty: 0
+        speedMultiplier: 1
     },
     light: {
         maxLoadRatio: 1,
         maxStaminaMultiplier: 0.98,
         staminaRegenMultiplier: 0.95,
-        speedMultiplier: 0.95,
-        initiativePenalty: 1
+        speedMultiplier: 0.95
     },
     moderate: {
         maxLoadRatio: 1.3,
         maxStaminaMultiplier: 0.85,
         staminaRegenMultiplier: 0.75,
-        speedMultiplier: 0.75,
-        initiativePenalty: 3
+        speedMultiplier: 0.75
     },
     heavy: {
         maxLoadRatio: Infinity,
         maxStaminaMultiplier: 0.65,
         staminaRegenMultiplier: 0.5,
-        speedMultiplier: 0.5,
-        initiativePenalty: 6
+        speedMultiplier: 0.5
     }
 };
 
