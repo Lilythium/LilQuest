@@ -21,5 +21,5 @@ export const FirstWorld: WorldDefinition = {
         { stageId: "forest-boss" }
     ],
     content: FirstWorldContent,
-    baseDifficulty: 3
+    baseDifficulty: 1
 };

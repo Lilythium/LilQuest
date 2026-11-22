@@ -16,7 +16,7 @@ export interface EnemyRewards {
     gold: number;
 }
 
-export interface EnemyDefinition {
+interface EnemyDefinitionBase {
     id: string;
 
     /**
@@ -27,16 +27,6 @@ export interface EnemyDefinition {
     name: string;
     description: string;
     tier: EnemyDefinitionTier;
-
-    /**
-     * "fixed": the enemy is displayed as `name`.
-     * "generated": a personal name is generated from the race's naming
-     * rules, so `raceId` is required.
-     */
-    naming: "fixed" | "generated";
-
-    /** Supplies naming rules, required if naming is generated. */
-    raceId?: string;
 
     /** Attributes at level 1, before level points are distributed. */
     baseAttributes: Attributes;
@@ -57,19 +47,28 @@ export interface EnemyDefinition {
     dropPoolId?: string;
 }
 
+export type EnemyDefinition = EnemyDefinitionBase & (
+    | { naming: "fixed"; raceId?: string }
+    | { naming: "generated"; raceId: string }
+);
+
 export interface EliteModifierDefinition {
     id: string;
 
     /** Single word used in the name: "Relentless Rat" / "Bob the Relentless". */
     title: string;
+
+    /** Per-attribute multipliers; 1 leaves that attribute unchanged. */
     attributeMultiplier: Attributes;
     addedSkillIds?: string[];
     addedTraitIds?: string[];
 
-    /** Multiplies on top of the elite tier's reward multiplier. */
+    /** Multiplies experience and gold rewards on top of the elite tier multiplier. */
     rewardMultiplier: {
         experience: number;
         gold: number;
-        rarityBonus: number;
     };
+
+    /** Added to the elite tier's equipment rarity bonus. */
+    rarityBonus: number;
 }
