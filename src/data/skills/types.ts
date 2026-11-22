@@ -19,7 +19,6 @@ export interface SkillDefinition {
     name: string;
     description: string;
     staminaCost: number;
-    cooldown: number;
 }
 
 export interface AttackSkill extends SkillDefinition {
@@ -86,7 +85,6 @@ export type StatStep = FlatModifier | RatioModifier | PreviousTransfer;
 export interface StatSkill extends SkillDefinition {
     type: "stat";
     staminaCost: number;
-    cooldown: number;
     transfers: StatStep[]; // applied in order
 }
 

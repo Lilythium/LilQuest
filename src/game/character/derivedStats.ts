@@ -1,7 +1,8 @@
 import type { Attributes, SecondaryStats } from "./types";
 import {
     calculateEncumbrance,
-    ENCUMBRANCE_CONFIG
+    ENCUMBRANCE_CONFIG,
+    type EncumbranceTier
 } from "./encumbrance";
 
 export interface DerivedStats {
@@ -35,8 +36,9 @@ export const DERIVED_STAT_FORMULAS = {
     initiative: (attributes: Attributes) =>
         attributes.dexterity,
 
-    speed: (attributes: Attributes) =>
-        attributes.dexterity,
+    speed: (attributes: Attributes, encumbrance: EncumbranceTier) =>
+        attributes.dexterity
+            * ENCUMBRANCE_CONFIG[encumbrance].speedMultiplier,
 
     armour: (equipmentArmour: number) =>
         equipmentArmour,
@@ -81,7 +83,10 @@ export function calculateDerivedStats(
             DERIVED_STAT_FORMULAS.initiative(attributes)
             - encumbranceConfig.initiativePenalty,
 
-        speed: DERIVED_STAT_FORMULAS.speed(attributes),
+        speed: DERIVED_STAT_FORMULAS.speed(
+            attributes,
+            encumbrance.tier
+        ),
 
         armour: DERIVED_STAT_FORMULAS.armour(equipmentArmour),
 

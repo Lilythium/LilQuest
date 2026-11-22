@@ -7,7 +7,6 @@ export const Mend: HealingSkill = {
     description: "Restores health based on wisdom.",
     baseHealing: 5,
     staminaCost: 2.5,
-    cooldown: 200,
     scaling: {
         attribute: "wisdom",
         coefficient: 0.5
@@ -21,7 +20,6 @@ export const Bulwark: EffectSkill = {
     description: "Reduce incoming damage by 10%.",
     target: "self",
     staminaCost: 2,
-    cooldown: 100,
     effectId: "bulwark",
     effectStacks: 1
 };
@@ -33,7 +31,6 @@ export const Sidestep: EffectSkill = {
     description: "Dodge the next attack. If you attack first, receive a crit chance bonus",
     target: "self",
     staminaCost: 2,
-    cooldown: 175,
     effectId: "sidestep",
     effectStacks: 1
 };
@@ -45,7 +42,6 @@ export const RecklessAbandon: CompositeSkill = {
     description: "Select an attack skill to use. The selected skill will do 2x damage but will slow the user.",
     allowedSkillTypes: ["attack"],
     staminaCost: 0,
-    cooldown: 200,
     scaling: {
         attribute: "strength",
         coefficient: 2
@@ -59,7 +55,6 @@ export const Sap: StatSkill = {
     name: "Sap",
     description: "Steal half of the target's initiative and add it to your own.",
     staminaCost: 2,
-    cooldown: 150,
     transfers: [
         {
             id: "drain-initiative",
