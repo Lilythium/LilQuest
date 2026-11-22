@@ -40,7 +40,7 @@ export interface Character {
     raceId: string;
     genderId: CharacterGender;
 
-    classId?: string; //TODO add class system
+    classId?: string; //class is chosen after creation, during run.
 
     level: number;
     experience: number;
