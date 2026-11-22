@@ -1,6 +1,6 @@
 import type { AttackSkill, Skill } from "../../game/skills/types";
 import { slash, simpleShot, bludgeon } from "./equipmentSkills";
-import { mend, bulwark, sidestep, recklessAbandon } from "./classSkills";
+import { mend, bulwark, sidestep, recklessAbandon, sap} from "./classSkills";
 
 export const SKILLS: Record<string, Skill> = {
     [slash.id]: slash,
@@ -9,7 +9,8 @@ export const SKILLS: Record<string, Skill> = {
     [mend.id]: mend,
     [bulwark.id]: bulwark,
     [sidestep.id]: sidestep,
-    [recklessAbandon.id]: recklessAbandon
+    [recklessAbandon.id]: recklessAbandon,
+    [sap.id]: sap
 };
 
 export function getSkillById(

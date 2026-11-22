@@ -64,13 +64,13 @@ export const sap: StatSkill = {
         {
             id: "drain-initiative",
             type: "ratio",
-            stat: { target: "target", stat: "initiative" },
-            percentage: -50
+            stat: { target: "target", stat: "currentInitiative" },
+            percentage: 0.5
         },
         {
             type: "previous-transfer",
             transferId: "drain-initiative",
-            destination: { target: "self", stat: "initiative" }
+            destination: { target: "self", stat: "currentInitiative" }
         }
     ]
 };

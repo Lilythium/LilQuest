@@ -1,6 +1,7 @@
 import type { AttackSkill } from "../../game/skills/types";
 
 export const slash: AttackSkill = {
+    type: "attack",
     id: "slash",
     name: "Slash",
     description: "A basic slashing attack with a melee weapon.",
@@ -15,6 +16,7 @@ export const slash: AttackSkill = {
 };
 
 export const simpleShot: AttackSkill = {
+    type: "attack",
     id: "simple-shot",
     name: "Simple Shot",
     description: "A basic ranged attack with a bow.",
@@ -29,6 +31,7 @@ export const simpleShot: AttackSkill = {
 };
 
 export const bludgeon: AttackSkill = {
+    type: "attack",
     id: "bludgeon",
     name: "Bludgeon",
     description: "A heavy bludgeoning attack with a blunt weapon.",
