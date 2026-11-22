@@ -4,6 +4,6 @@ export const priest: ClassDefinition = {
     id: "priest",
     name: "Priest",
     description: "A holy servant of the divine, blessed with the power to heal and protect.",
-    classSkillId: "heal", // TODO: implement skill
+    classSkillId: "mend", // TODO: implement skill
     allowedRaceIds: ["human", "elf"],
 };
