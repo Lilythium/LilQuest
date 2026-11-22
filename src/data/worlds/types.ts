@@ -2,7 +2,7 @@ import type { StageReference } from "./stages/types";
 
 export interface WorldContentProfile {
     basicEnemyPoolId: string;
-    eliteEnemyPoolId: string;
+    eliteModifierPoolId: string;
     miniBossPoolId: string;
     bossId: string;
     equipmentPoolId: string;

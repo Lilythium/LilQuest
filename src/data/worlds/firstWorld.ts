@@ -3,7 +3,7 @@ import type { WorldDefinition, WorldContentProfile } from "./types";
 
 export const FirstWorldContent: WorldContentProfile = {
     basicEnemyPoolId: "forest-basic-enemies",
-    eliteEnemyPoolId: "forest-elite-enemies",
+    eliteModifierPoolId: "forest-elite-modifiers",
     miniBossPoolId: "forest-mini-bosses",
     bossId: "forest-guardian",
     equipmentPoolId: "beginner-equipment"
@@ -21,5 +21,5 @@ export const FirstWorld: WorldDefinition = {
         { stageId: "forest-boss" }
     ],
     content: FirstWorldContent,
-    baseDifficulty: 1
+    baseDifficulty: 3
 };

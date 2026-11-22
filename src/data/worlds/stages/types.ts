@@ -11,7 +11,7 @@ export interface StageDifficulty {
 
 export interface StageContentOverrides {
     basicEnemyPoolId?: string;
-    eliteEnemyPoolId?: string;
+    eliteModifierPoolId?: string;
     miniBossPoolId?: string;
     equipmentPoolId?: string;
 }
