@@ -44,6 +44,8 @@ export interface StagePath {
     id: string;
     label: string;
     nodes: StageNodeRequirement[];
+    /** Terminal nodes with the same exitId share an exit; default is "default". Separate exits are reserved for future warp stages, and nothing routes on them yet. */
+    exitId?: string;
 }
 
 export interface BranchSection {

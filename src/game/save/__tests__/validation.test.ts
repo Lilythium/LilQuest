@@ -126,6 +126,17 @@ describe("GameSave validation", () => {
         expect(validateGameSave(save)).toBe(false);
     });
 
+    it("rejects a stage map with a dangling next node", () => {
+        const save = createValidGameSave();
+        const node =
+            save.currentRun!.worldProgress[0].maps["first-stage"].nodes[
+                "first-stage:start"
+            ];
+        node.next = ["missing-node"];
+
+        expect(validateGameSave(save)).toBe(false);
+    });
+
     it("rejects invalid encounter state", () => {
         const save = createValidGameSave();
         const run = save.currentRun!;

@@ -79,7 +79,23 @@ export function createValidGameSave(): GameSave {
                 {
                     worldId: "first-world",
                     currentStageId: "first-stage",
-                    completedStageIds: []
+                    completedStageIds: [],
+                    maps: {
+                        "first-stage": {
+                            stageId: "first-stage",
+                            startNodeId: "first-stage:start",
+                            nodes: {
+                                "first-stage:start": {
+                                    id: "first-stage:start",
+                                    type: "rest",
+                                    next: [],
+                                    exitId: "default"
+                                }
+                            }
+                        }
+                    },
+                    currentNodeId: null,
+                    completedNodeIds: []
                 }
             ]
         }

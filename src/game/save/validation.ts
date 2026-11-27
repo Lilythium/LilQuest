@@ -9,6 +9,23 @@ import {
 } from "../../data/equipment/types";
 import type { GameSave } from "./types";
 import { isCharacterGender } from "../character/naming/types";
+import type { EnemyTier } from "../../data/enemies/types";
+import type { StageNodeType } from "../../data/worlds/stages/types";
+
+const STAGE_NODE_TYPES: readonly StageNodeType[] = [
+    "encounter",
+    "interaction",
+    "storefront",
+    "rest",
+    "treasure"
+];
+
+const ENEMY_TIERS: readonly EnemyTier[] = [
+    "basic",
+    "elite",
+    "mini-boss",
+    "boss"
+];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
     return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -205,6 +222,100 @@ function validateCharacter(value: unknown, path: string): void {
     expectStringArray(value.traitIds, `${path}.traitIds`);
 }
 
+function validateStageMap(
+    value: unknown,
+    mapId: string,
+    path: string
+): Record<string, unknown> {
+    expectObject(value, path);
+    expectNonEmptyString(value.stageId, `${path}.stageId`);
+    if (value.stageId !== mapId) {
+        throw new Error(
+            `Invalid GameSave: "${path}.stageId" must match its map key.`
+        );
+    }
+
+    expectNonEmptyString(value.startNodeId, `${path}.startNodeId`);
+    expectObject(value.nodes, `${path}.nodes`);
+    const nodes = value.nodes;
+    if (!Object.prototype.hasOwnProperty.call(nodes, value.startNodeId)) {
+        throw new Error(
+            `Invalid GameSave: "${path}.startNodeId" does not exist in the map.`
+        );
+    }
+
+    for (const [nodeId, nodeValue] of Object.entries(nodes)) {
+        const nodePath = `${path}.nodes.${nodeId}`;
+        expectObject(nodeValue, nodePath);
+        expectNonEmptyString(nodeValue.id, `${nodePath}.id`);
+        if (nodeValue.id !== nodeId) {
+            throw new Error(
+                `Invalid GameSave: "${nodePath}.id" must match its node key.`
+            );
+        }
+        if (
+            typeof nodeValue.type !== "string" ||
+            !STAGE_NODE_TYPES.includes(nodeValue.type as StageNodeType)
+        ) {
+            throw new Error(`Invalid GameSave: "${nodePath}.type" is invalid.`);
+        }
+        if (nodeValue.contentTag !== undefined) {
+            expectString(nodeValue.contentTag, `${nodePath}.contentTag`);
+        }
+        if (nodeValue.exitId !== undefined) {
+            expectString(nodeValue.exitId, `${nodePath}.exitId`);
+        }
+
+        expectArray(nodeValue.next, `${nodePath}.next`);
+        nodeValue.next.forEach((nextId, index) => {
+            const nextPath = `${nodePath}.next[${index}]`;
+            expectNonEmptyString(nextId, nextPath);
+            if (!Object.prototype.hasOwnProperty.call(nodes, nextId)) {
+                throw new Error(
+                    `Invalid GameSave: "${nextPath}" does not exist in the map.`
+                );
+            }
+        });
+
+        if (nodeValue.encounter !== undefined) {
+            const encounterPath = `${nodePath}.encounter`;
+            expectObject(nodeValue.encounter, encounterPath);
+            expectNonEmptyString(
+                nodeValue.encounter.enemyId,
+                `${encounterPath}.enemyId`
+            );
+            if (
+                typeof nodeValue.encounter.tier !== "string" ||
+                !ENEMY_TIERS.includes(nodeValue.encounter.tier as EnemyTier)
+            ) {
+                throw new Error(
+                    `Invalid GameSave: "${encounterPath}.tier" is invalid.`
+                );
+            }
+            expectFiniteNumber(
+                nodeValue.encounter.levelRoll,
+                `${encounterPath}.levelRoll`
+            );
+            if (
+                nodeValue.encounter.levelRoll < 0 ||
+                nodeValue.encounter.levelRoll >= 1
+            ) {
+                throw new Error(
+                    `Invalid GameSave: "${encounterPath}.levelRoll" must be in [0, 1).`
+                );
+            }
+            if (nodeValue.encounter.eliteModifierId !== undefined) {
+                expectNonEmptyString(
+                    nodeValue.encounter.eliteModifierId,
+                    `${encounterPath}.eliteModifierId`
+                );
+            }
+        }
+    }
+
+    return nodes;
+}
+
 function validateCurrentRun(value: unknown): void {
     expectObject(value, "currentRun");
     expectNonEmptyString(value.runId, "currentRun.runId");
@@ -228,6 +339,29 @@ function validateCurrentRun(value: unknown): void {
         expectNonEmptyString(progress.worldId, `${path}.worldId`);
         expectNonEmptyString(progress.currentStageId, `${path}.currentStageId`);
         expectStringArray(progress.completedStageIds, `${path}.completedStageIds`);
+
+        expectObject(progress.maps, `${path}.maps`);
+        const nodeIds = new Set<string>();
+        for (const [mapId, mapValue] of Object.entries(progress.maps)) {
+            const nodes = validateStageMap(
+                mapValue,
+                mapId,
+                `${path}.maps.${mapId}`
+            );
+            for (const nodeId of Object.keys(nodes)) {
+                nodeIds.add(nodeId);
+            }
+        }
+
+        if (progress.currentNodeId !== null) {
+            expectNonEmptyString(progress.currentNodeId, `${path}.currentNodeId`);
+            if (!nodeIds.has(progress.currentNodeId)) {
+                throw new Error(
+                    `Invalid GameSave: "${path}.currentNodeId" does not exist in any stage map.`
+                );
+            }
+        }
+        expectStringArray(progress.completedNodeIds, `${path}.completedNodeIds`);
     });
 }
 
