@@ -25,6 +25,7 @@ export function createCombat(
         enemies,
         clock: 0,
         turnCount: 0,
+        turnStartedFor: null,
         status: "active"
     };
 }
@@ -135,6 +136,13 @@ export function beginTurn(
     state: CombatState,
     actor: Combatant
 ): CombatEvent[] {
+    assertActorTurn(state, actor);
+
+    if (state.turnStartedFor === actor.id) {
+        return [];
+    }
+
+    state.turnStartedFor = actor.id;
     actor.encounter.currentStamina = Math.min(
         actor.derived.maxStamina,
         actor.encounter.currentStamina + actor.derived.staminaRegen
@@ -250,6 +258,7 @@ export function performAction(
         actor.encounter.currentInitiative - INITIATIVE_ACT_THRESHOLD
     );
     state.turnCount++;
+    state.turnStartedFor = null;
 
     for (const combatant of getCombatants(state)) {
         if (

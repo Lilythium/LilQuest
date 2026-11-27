@@ -46,8 +46,11 @@ export function calculateDamage(
             break;
     }
 
-    return Math.max(
+    const typeMitigatedDamage = Math.max(
         0,
         power * (1 - calculateReduction(defense))
     );
+
+    // Values are fractions (0.05 = 5%); this is the hook where Bulwark-style effects will later apply.
+    return typeMitigatedDamage * (1 - defender.damageReduction);
 }

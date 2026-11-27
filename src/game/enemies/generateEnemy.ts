@@ -68,7 +68,8 @@ export function generateEnemy(
     let name = definition.name;
     if (definition.naming === "generated") {
         const race = getRace(definition.raceId);
-        const personalName = generateName(race.namingRules, "neutral", rng);
+        const gender = rng.pick(["masculine", "feminine"] as const);
+        const personalName = generateName(race.namingRules, gender, rng);
         name = elite
             ? `${personalName} the ${elite.title}`
             : personalName;

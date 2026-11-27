@@ -30,6 +30,7 @@ export interface CombatState {
     enemies: Combatant[];
     clock: number;
     turnCount: number;
+    turnStartedFor: string | null;
     status: CombatStatus;
 }
 

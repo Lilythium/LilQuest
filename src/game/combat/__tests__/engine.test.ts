@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { DEFAULT_SECONDARY_STATS, type Attributes } from "../../character/types";
 import { createRng } from "../../random/rng";
 import { runAutoCombat } from "../autoCombat";
-import { advanceToNextActor, createCombat } from "../engine";
+import {
+    advanceToNextActor,
+    beginTurn,
+    createCombat,
+    performAction
+} from "../engine";
 import type { Combatant, CombatSide } from "../types";
 
 const attributes: Attributes = {
@@ -35,7 +40,8 @@ function createTestCombatant(
             carryingCapacity: 10,
             speed,
             armour: 0,
-            magicResistance: 0
+            magicResistance: 0,
+            damageReduction: 0
         },
         currentHealth: 30,
         encounter: {
@@ -116,6 +122,29 @@ describe("combat engine", () => {
         playerSide.enemies[0].encounter.currentInitiative = 100;
         expect(advanceToNextActor(playerSide)).toBe(playerSide.player);
     });
+
+    it("regenerates stamina once per turn and again after the action resolves", () => {
+        const state = createTestCombat();
+        const actor = state.player;
+        actor.encounter.currentInitiative = 100;
+        actor.encounter.currentStamina = 1;
+
+        expect(beginTurn(state, actor)).toEqual([{
+            type: "turn-start",
+            actorId: actor.id,
+            clock: state.clock
+        }]);
+        expect(actor.encounter.currentStamina).toBe(3);
+        expect(beginTurn(state, actor)).toEqual([]);
+        expect(actor.encounter.currentStamina).toBe(3);
+
+        performAction(state, actor, { type: "pass" }, createRng("pass-turn"));
+        expect(state.turnStartedFor).toBeNull();
+        expect(advanceToNextActor(state)).toBe(actor);
+        expect(beginTurn(state, actor)).toHaveLength(1);
+        expect(actor.encounter.currentStamina).toBe(5);
+    });
+
     it("completes fights when equal speeds are not exactly representable", () => {
         // Speeds like 1.1 accumulate floating point error; equal-speed combatants
         // used to reach "ready" a hair apart and trip the turn-order check.

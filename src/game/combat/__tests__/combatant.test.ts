@@ -76,4 +76,18 @@ describe("player combatants", () => {
         expect(combatant.encounter.currentStamina)
             .toBe(combatant.derived.maxStamina);
     });
+
+    it("clamps character health to the effective maximum", () => {
+        const character = createCharacter(
+            RACES.human,
+            "neutral",
+            createRng("combatant-health-clamp-test"),
+            runBonuses
+        );
+        character.currentHealth = 10000;
+
+        const combatant = createPlayerCombatant(character);
+
+        expect(combatant.currentHealth).toBe(combatant.derived.maxHealth);
+    });
 });

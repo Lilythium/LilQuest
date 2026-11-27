@@ -4,7 +4,10 @@ import {
     ENCUMBRANCE_CONFIG,
     type EncumbranceTier
 } from "./encumbrance";
-import { DEXTERITY_SPEED_BONUS } from "../combat/constants";
+import {
+    DEXTERITY_SPEED_BONUS,
+    MAX_DAMAGE_REDUCTION
+} from "../combat/constants";
 
 export interface DerivedStats {
     maxHealth: number;
@@ -17,6 +20,7 @@ export interface DerivedStats {
 
     armour: number;
     magicResistance: number;
+    damageReduction: number;
 }
 
 export const DERIVED_STAT_FORMULAS = {
@@ -87,6 +91,11 @@ export function calculateDerivedStats(
             DERIVED_STAT_FORMULAS.magicResistance(
                 attributes,
                 secondaryStats.magicResistance ?? 0
-            )
+            ),
+
+        damageReduction: Math.min(
+            MAX_DAMAGE_REDUCTION,
+            Math.max(0, secondaryStats.damageReduction ?? 0)
+        )
     };
 }

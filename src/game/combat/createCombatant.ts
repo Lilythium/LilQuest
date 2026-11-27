@@ -49,7 +49,14 @@ export function createPlayerCombatant(character: Character): Combatant {
         attributes: effectiveStats.attributes,
         secondaryStats: effectiveStats.secondaryStats,
         derived: effectiveStats.derived,
-        currentHealth: character.currentHealth,
+        // Character has no bonusMaxHealth field, so this clamp drops prestige bonus health once that feature is active.
+        currentHealth: Math.max(
+            0,
+            Math.min(
+                character.currentHealth,
+                effectiveStats.derived.maxHealth
+            )
+        ),
         encounter: {
             currentStamina: effectiveStats.derived.maxStamina,
             currentInitiative: 0
