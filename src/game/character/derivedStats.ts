@@ -40,8 +40,8 @@ export const DERIVED_STAT_FORMULAS = {
     armour: (equipmentArmour: number) =>
         equipmentArmour,
 
-    magicResistance: (attributes: Attributes) =>
-        attributes.wisdom * 1.5
+    magicResistance: (attributes: Attributes, bonus = 0) =>
+        attributes.wisdom * 1.5 + bonus
 };
 
 export function calculateDerivedStats(
@@ -84,6 +84,9 @@ export function calculateDerivedStats(
         armour: DERIVED_STAT_FORMULAS.armour(equipmentArmour),
 
         magicResistance:
-            DERIVED_STAT_FORMULAS.magicResistance(attributes)
+            DERIVED_STAT_FORMULAS.magicResistance(
+                attributes,
+                secondaryStats.magicResistance ?? 0
+            )
     };
 }

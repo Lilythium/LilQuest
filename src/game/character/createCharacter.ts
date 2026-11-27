@@ -1,8 +1,9 @@
 
 import { generateName } from "./naming/nameGenerator";
-import type {CharacterGender} from "./naming/types";
+import type { CharacterGender } from "./naming/types";
 
 import type { RandomGenerator } from "../random/rng";
+import type { CharacterEquipment } from "../../data/equipment/types";
 import {
     DEFAULT_SECONDARY_STATS,
     type Attributes,
@@ -10,8 +11,15 @@ import {
     type SecondaryStats
 } from "./types";
 import { calculateDerivedStats } from "./derivedStats";
-import type {RaceContent} from "../../data/races/types";
+import type { RaceContent } from "../../data/races/types";
 import type { RunBonuses } from "../progression/resolveRunBonuses";
+import { getEquipmentDefinition } from "../../data/equipment";
+import {
+    getHandsRequired,
+    type HandheldEquipmentDefinition
+} from "../../data/equipment/types";
+import { createEquipmentInstance } from "../equipment/createInstance";
+import { canEquipInCharacterSlot } from "../equipment/slots";
 
 export function createCharacter(
     race: RaceContent,
@@ -29,6 +37,35 @@ export function createCharacter(
 
     const attributes = generateStartingAttributes(rng, race.definition.attributeMultipliers);
     const secondaryStats = generateStartingSecondaryStats(race.definition.secondaryStatModifiers);
+    const startingWeaponDefinition =
+        getEquipmentDefinition(race.definition.startingWeaponId);
+
+    if (!isHandheldWeapon(startingWeaponDefinition)) {
+        throw new Error(
+            `Starting equipment "${race.definition.startingWeaponId}" is not a weapon.`
+        );
+    }
+
+    const startingWeapon = createEquipmentInstance(
+        startingWeaponDefinition,
+        `${id}-starting-weapon`
+    );
+    const equipment: CharacterEquipment = {
+        "main-hand": startingWeapon
+    };
+
+    if (!canEquipInCharacterSlot(startingWeaponDefinition.slotType, "main-hand")) {
+        throw new Error(`Weapon "${startingWeaponDefinition.id}" cannot be equipped in the main hand.`);
+    }
+
+    if (getHandsRequired(startingWeaponDefinition) === 2) {
+        if (!canEquipInCharacterSlot(startingWeaponDefinition.slotType, "off-hand")) {
+            throw new Error(`Two-handed weapon "${startingWeaponDefinition.id}" cannot occupy the off hand.`);
+        }
+
+        equipment["off-hand"] = startingWeapon;
+    }
+
     const baseMaxHealth = calculateDerivedStats(
         attributes,
         secondaryStats,
@@ -46,8 +83,8 @@ export function createCharacter(
         gold: runBonuses.startingGold,
         attributes: attributes,
         secondaryStats: secondaryStats,
-        inventory: [], //TODO weapon generation - generate start weapon here
-        equipment: {},
+        inventory: [],
+        equipment,
         currentHealth: baseMaxHealth + runBonuses.bonusMaxHealth,
         encounterStats: null,
         learnedSkillIds: [],
@@ -56,6 +93,13 @@ export function createCharacter(
     };
 }
 
+function isHandheldWeapon(
+    definition: ReturnType<typeof getEquipmentDefinition>
+): definition is HandheldEquipmentDefinition {
+    return definition.slotType === "weapon"
+        && "skill" in definition
+        && typeof definition.skill === "string";
+}
 
 function generateStartingAttributes(
     rng: RandomGenerator,

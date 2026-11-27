@@ -15,6 +15,8 @@ export interface SecondaryStats {
     healthRegen: number;
     critChance: number;
     critMultiplier: number;
+    magicResistance?: number;
+    damageReduction?: number;
 }
 
 export const DEFAULT_SECONDARY_STATS: SecondaryStats = {
