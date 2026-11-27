@@ -1,7 +1,9 @@
 import { getEquipmentDefinition } from "../../data/equipment";
 import { SKILLS } from "../../data/skills";
 import type { Character } from "../character/types";
+import { calculateDerivedStats } from "../character/derivedStats";
 import { getEffectiveStats } from "../character/effectiveStats";
+import type { GeneratedEnemy } from "../enemies/generateEnemy";
 import type { Combatant } from "./types";
 
 export function createPlayerCombatant(character: Character): Combatant {
@@ -58,5 +60,39 @@ export function createPlayerCombatant(character: Character): Combatant {
         skillIds,
         traitIds: [...character.traitIds],
         statusEffects: []
+    };
+}
+
+export function createEnemyCombatant(
+    enemy: GeneratedEnemy,
+    id: string
+): Combatant {
+    const derived = calculateDerivedStats(
+        enemy.attributes,
+        enemy.secondaryStats,
+        0,
+        enemy.armour
+    );
+
+    return {
+        id,
+        name: enemy.name,
+        side: "enemy",
+        level: enemy.level,
+        attributes: enemy.attributes,
+        secondaryStats: enemy.secondaryStats,
+        derived,
+        currentHealth: derived.maxHealth,
+        encounter: {
+            currentStamina: derived.maxStamina,
+            currentInitiative: 0
+        },
+        combat: {
+            damageMultiplier: 1
+        },
+        skillIds: [...enemy.skillIds],
+        traitIds: [...enemy.traitIds],
+        statusEffects: [],
+        rewards: { ...enemy.rewards }
     };
 }

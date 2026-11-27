@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CLASSES, getClass } from "./classes";
-import { getPool } from "./pools";
+import { ENEMIES, ELITE_MODIFIERS, getEnemy, getEliteModifier } from "./enemies";
+import { POOLS, getPool } from "./pools";
 import { SKILLS } from "./skills";
 import { getStage, STAGES } from "./worlds/stages";
 import { getWorld, WORLDS } from "./worlds";
@@ -26,6 +27,27 @@ describe("content registries", () => {
         for (const classId of Object.keys(CLASSES)) {
             const characterClass = getClass(classId);
             expect(SKILLS[characterClass.classSkillId]).toBeDefined();
+        }
+    });
+
+    it("resolves enemy pool entries and all enemy skills", () => {
+        for (const pool of Object.values(POOLS)) {
+            if (pool.type === "basic-enemy") {
+                for (const entry of pool.entries) {
+                    expect(getEnemy(entry.contentId)).toBe(ENEMIES[entry.contentId]);
+                }
+            } else if (pool.type === "elite-modifier") {
+                for (const entry of pool.entries) {
+                    expect(getEliteModifier(entry.contentId))
+                        .toBe(ELITE_MODIFIERS[entry.contentId]);
+                }
+            }
+        }
+
+        for (const enemy of Object.values(ENEMIES)) {
+            for (const skillId of enemy.skillIds) {
+                expect(SKILLS[skillId]).toBeDefined();
+            }
         }
     });
 });

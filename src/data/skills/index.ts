@@ -1,6 +1,7 @@
 import type { AnySkill } from "./types";
 import { Slash, SimpleShot, Bludgeon } from "./equipmentSkills";
 import { Mend, Bulwark, Sidestep, RecklessAbandon, Sap } from "./classSkills";
+import { Bite } from "./enemySkills";
 
 export const SKILLS: Record<string, AnySkill> = {
     [Slash.id]: Slash,
@@ -10,7 +11,8 @@ export const SKILLS: Record<string, AnySkill> = {
     [Bulwark.id]: Bulwark,
     [Sidestep.id]: Sidestep,
     [RecklessAbandon.id]: RecklessAbandon,
-    [Sap.id]: Sap
+    [Sap.id]: Sap,
+    [Bite.id]: Bite
 };
 
 export function getSkill(skillId: string): AnySkill {

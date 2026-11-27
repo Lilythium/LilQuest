@@ -34,6 +34,9 @@ interface EnemyDefinitionBase {
     /** Relative weights used to randomly distribute level points. */
     attributeGrowth: Attributes;
 
+    /** Flat armour before any other combat modifiers. */
+    armour?: number;
+
     secondaryStats?: Partial<SecondaryStats>;
 
     /** At least one. */
