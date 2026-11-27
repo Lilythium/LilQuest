@@ -1,4 +1,10 @@
-import type { Attributes } from "../../game/character/types";
+import type {
+    Attributes,
+    Character,
+    EncounterState,
+    SecondaryStats
+} from "../../game/character/types";
+import type { DerivedStats } from "../../game/character/derivedStats";
 
 export type DamageType =
     | "blunt"
@@ -21,25 +27,38 @@ export interface SkillDefinition {
     staminaCost: number;
 }
 
+export interface AttributeScaling {
+    attribute: keyof Attributes;
+    coefficient: number;
+}
+
+export interface CombatStats {
+    damageMultiplier: number;
+}
+
+export type SkillStatReference =
+    | { target: Target; scope: "attribute"; stat: keyof Attributes }
+    | { target: Target; scope: "secondary"; stat: keyof SecondaryStats }
+    | { target: Target; scope: "derived"; stat: keyof DerivedStats }
+    | { target: Target; scope: "character"; stat: keyof Pick<Character, "currentHealth"> }
+    | { target: Target; scope: "encounter"; stat: keyof EncounterState }
+    | { target: Target; scope: "combat"; stat: keyof CombatStats };
+
+export type SkillScaling =
+    | { operation: "add"; stat: SkillStatReference; amount: number }
+    | { operation: "multiply"; stat: SkillStatReference; factor: number };
+
 export interface AttackSkill extends SkillDefinition {
     type: "attack";
     baseDamage: number;
     damageType: DamageType;
-
-    scaling: {
-        attribute: keyof Attributes;
-        coefficient: number;
-    };
+    scaling: AttributeScaling;
 }
 
 export interface HealingSkill extends SkillDefinition {
     type: "healing";
     baseHealing: number;
-
-    scaling: {
-        attribute: keyof Attributes;
-        coefficient: number;
-    };
+    scaling: AttributeScaling;
 }
 
 export type Target = "self" | "target";
@@ -91,10 +110,7 @@ export interface StatSkill extends SkillDefinition {
 export interface CompositeSkill extends SkillDefinition {
     type: "composite";
     allowedSkillTypes: SkillType[];
-    scaling?: {
-        attribute: keyof Attributes;
-        coefficient: number;
-    };
+    scaling?: SkillScaling[];
     effectIds?: string[];
 }
 

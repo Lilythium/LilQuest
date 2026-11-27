@@ -42,10 +42,13 @@ export const RecklessAbandon: CompositeSkill = {
     description: "Select an attack skill to use. The selected skill will do 2x damage but will slow the user.",
     allowedSkillTypes: ["attack"],
     staminaCost: 0,
-    scaling: {
-        attribute: "strength",
-        coefficient: 2
-    },
+    scaling: [
+        {
+            operation: "multiply",
+            stat: { target: "self", scope: "combat", stat: "damageMultiplier" },
+            factor: 2
+        }
+    ],
     effectIds: ["slowed"]
 };
 

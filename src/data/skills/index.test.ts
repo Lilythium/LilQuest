@@ -12,3 +12,24 @@ describe("getSkill", () => {
         );
     });
 });
+
+describe("Reckless Abandon", () => {
+    it("doubles damage with a combat multiplier instead of attribute scaling", () => {
+        const skill = getSkill("reckless-abandon");
+
+        expect(skill).toMatchObject({
+            type: "composite",
+            scaling: [
+                {
+                    operation: "multiply",
+                    stat: {
+                        target: "self",
+                        scope: "combat",
+                        stat: "damageMultiplier"
+                    },
+                    factor: 2
+                }
+            ]
+        });
+    });
+});
