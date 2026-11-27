@@ -1,5 +1,6 @@
 import type { EnemyRewards } from "../../data/enemies/types";
 import type { Character } from "../character/types";
+import { applyExperience } from "../progression/levelling";
 import type { CombatState, CombatStatus } from "./types";
 
 export interface EncounterResult {
@@ -41,10 +42,14 @@ export function applyEncounterResult(
     character: Character,
     result: EncounterResult
 ): Character {
+    const experiencedCharacter = applyExperience(
+        character,
+        result.rewards.experience
+    );
+
     return {
-        ...character,
+        ...experiencedCharacter,
         currentHealth: result.playerHealth,
-        experience: character.experience + result.rewards.experience,
         gold: character.gold + result.rewards.gold
     };
 }

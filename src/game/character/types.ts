@@ -46,6 +46,7 @@ export interface Character {
 
     level: number;
     experience: number;
+    unspentAttributePoints: number;
     gold: number;
 
     currentHealth: number; // Health will persist between encounters for now, may change later

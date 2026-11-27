@@ -148,6 +148,15 @@ function validateCharacter(value: unknown, path: string): void {
 
     expectPositiveInteger(value.level, `${path}.level`);
     expectNonNegativeNumber(value.experience, `${path}.experience`);
+    expectNonNegativeNumber(
+        value.unspentAttributePoints,
+        `${path}.unspentAttributePoints`
+    );
+    if (!Number.isInteger(value.unspentAttributePoints)) {
+        throw new Error(
+            `Invalid GameSave: "${path}.unspentAttributePoints" must be an integer.`
+        );
+    }
     expectNonNegativeNumber(value.gold, `${path}.gold`);
     expectNonNegativeNumber(value.currentHealth, `${path}.currentHealth`);
 

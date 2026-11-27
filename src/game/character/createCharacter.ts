@@ -80,6 +80,7 @@ export function createCharacter(
         genderId,
         level: 1,
         experience: 0,
+        unspentAttributePoints: 0,
         gold: runBonuses.startingGold,
         attributes: attributes,
         secondaryStats: secondaryStats,

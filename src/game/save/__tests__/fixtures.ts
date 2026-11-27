@@ -34,6 +34,7 @@ export function createValidGameSave(): GameSave {
 
                 level: 1,
                 experience: 0,
+                unspentAttributePoints: 0,
                 gold: 0,
 
                 currentHealth: 25,
