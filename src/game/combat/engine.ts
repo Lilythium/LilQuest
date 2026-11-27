@@ -4,6 +4,7 @@ import {
     BASE_INITIATIVE_PER_SECOND,
     INITIATIVE_ACT_THRESHOLD,
     INITIATIVE_CAP,
+    INITIATIVE_EPSILON,
     MAX_COMBAT_TURNS
 } from "./constants";
 import { resolveAttackSkill, resolveHealingSkill } from "./skillResolution";
@@ -109,10 +110,17 @@ export function advanceToNextActor(state: CombatState): Combatant | null {
     state.clock += secondsUntilActor;
     for (const combatant of livingCombatants) {
         const rate = rates.get(combatant)!;
-        combatant.encounter.currentInitiative = Math.min(
+        const initiative = Math.min(
             INITIATIVE_CAP,
             combatant.encounter.currentInitiative + rate * secondsUntilActor
         );
+
+        // Floating point error can leave initiative a hair either side of the
+        // threshold. Snap near-threshold values so ties are real ties.
+        combatant.encounter.currentInitiative =
+            Math.abs(initiative - INITIATIVE_ACT_THRESHOLD) < INITIATIVE_EPSILON
+                ? INITIATIVE_ACT_THRESHOLD
+                : initiative;
     }
 
     const actor = selectReadyActor(state);
@@ -120,7 +128,6 @@ export function advanceToNextActor(state: CombatState): Combatant | null {
         throw new Error("Combat initiative advanced without a ready actor.");
     }
 
-    actor.encounter.currentInitiative = INITIATIVE_ACT_THRESHOLD;
     return actor;
 }
 

@@ -116,4 +116,16 @@ describe("combat engine", () => {
         playerSide.enemies[0].encounter.currentInitiative = 100;
         expect(advanceToNextActor(playerSide)).toBe(playerSide.player);
     });
+    it("completes fights when equal speeds are not exactly representable", () => {
+        // Speeds like 1.1 accumulate floating point error; equal-speed combatants
+        // used to reach "ready" a hair apart and trip the turn-order check.
+        for (const speed of [1.1, 1.2, 1.3, 0.7, 1.15]) {
+            const state = createTestCombat(speed, speed, ["bite"]);
+
+            expect(() =>
+                runAutoCombat(state, createRng(`float-tie-${speed}`))
+            ).not.toThrow();
+            expect(state.status).not.toBe("active");
+        }
+    });
 });
